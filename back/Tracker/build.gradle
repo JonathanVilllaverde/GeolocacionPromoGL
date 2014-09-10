@@ -1,0 +1,51 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+
+version = '1.0'
+
+repositories {
+	mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+
+	ext {    
+	    springVersion = "3.2.4.RELEASE"
+	    jerseyVersionOld = "1.1.5.2"
+	    jerseyVersion = "1.9"
+	}    
+	
+	/* Logger */	    
+	compile ("ch.qos.logback:logback-classic:1.1.2")    
+	    
+	/* Spring dependencies */
+    compile("org.springframework:spring-web:$springVersion")
+	compile("org.springframework:spring-core:$springVersion")
+	testCompile("org.springframework:spring-test:$springVersion")  
+	
+	/* Test dependencies */
+    testCompile 'junit:junit:4.8.2'
+	    
+    /* Jackson JSON Mapper */
+    compile ("org.codehaus.jackson:jackson-jaxrs:1.9.13")    
+    compile ("org.codehaus.jackson:jackson-xc:1.9.13")
+
+	/* Java dependencies */
+	providedCompile("javax.servlet:servlet-api:2.5")
+	
+	/* MongoDB dependencies */
+	compile ("org.mongodb:mongo-java-driver:2.12.3")
+	compile ("org.springframework.data:spring-data-mongodb:1.6.0.RELEASE")
+	
+	/* Jersey Rest dependencies*/
+    compile ("com.sun.jersey:jersey-server:$jerseyVersionOld")
+    compile ("com.sun.jersey:jersey-client:$jerseyVersionOld")
+    compile ("com.sun.jersey:jersey-json:$jerseyVersionOld")
+    compile ("com.sun.jersey.contribs:jersey-spring:$jerseyVersionOld")
+
+
+    
+
+}
