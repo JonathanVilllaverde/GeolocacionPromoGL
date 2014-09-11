@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name frontGeolocacionApp
+ * @name geolocacionApp
  * @description
- * # frontGeolocacionApp
+ * # geolocacionApp
  *
  * Main module of the application.
  */
 angular
-  .module('frontGeolocacionApp', [
+  .module('geolocacionApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -26,6 +26,22 @@ angular
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
+      })
+      .when('/contact', {
+        templateUrl: 'views/contact.html',
+        controller: 'ContactCtrl'
+      })
+      .when('/layout/header', {
+        templateUrl: 'views/layout/header.html',
+        controller: 'HeaderCtrl'
+      })
+      .when('/layout/navbar', {
+        templateUrl: 'views/layout/navbar.html',
+        controller: 'NavbarCtrl'
+      })
+      .when('/layout/footer', {
+        templateUrl: 'views/layout/footer.html',
+        controller: 'FooterCtrl'
       })
       .otherwise({
         redirectTo: '/'

@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: AboutCtrl', function () {
+describe('Controller: LayoutHeaderCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('layoutnavbarApp'));
+  beforeEach(module('frontGeolocacionApp'));
 
-  var AboutCtrl,
+  var LayoutHeaderCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    AboutCtrl = $controller('AboutCtrl', {
+    LayoutHeaderCtrl = $controller('LayoutHeaderCtrl', {
       $scope: scope
     });
   }));

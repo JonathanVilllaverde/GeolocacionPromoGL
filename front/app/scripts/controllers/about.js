@@ -2,16 +2,12 @@
 
 /**
  * @ngdoc function
- * @name frontGeolocacionApp.controller:AboutCtrl
+ * @name geolocacionApp.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the frontGeolocacionApp
+ * Controller of the geolocacionApp
  */
-angular.module('frontGeolocacionApp')
-  .controller('AboutCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+angular.module('geolocacionApp')
+  .controller('AboutCtrl', ['$scope', function ($scope) {
+  	
+  }]);

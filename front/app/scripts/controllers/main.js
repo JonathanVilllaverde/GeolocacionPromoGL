@@ -2,16 +2,12 @@
 
 /**
  * @ngdoc function
- * @name frontGeolocacionApp.controller:MainCtrl
+ * @name layoutnavbarApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the frontGeolocacionApp
+ * Controller of the layoutnavbarApp
  */
-angular.module('frontGeolocacionApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+angular.module('geolocacionApp')
+  .controller('MainCtrl', ['$scope', function ($scope) {
+   
+  }]);
