@@ -32,9 +32,9 @@ angular.module('geolocacionApp')
             }, function(response) {
                 // something went wrong
                 return $q.reject(response.data);
-        	});
-        }
-	};
+       		});
+    };
+
 	this.post = function(resourceURL){
 		return $http.post(resourceURL)
             .then(function(response) {
@@ -49,8 +49,7 @@ angular.module('geolocacionApp')
                 // something went wrong
                 return $q.reject(response.data);
         	});
-        }
-	};
+    };
 
 	this.put = function(resourceURL){};
 	this.delete = function(resourceURL){};

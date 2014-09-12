@@ -1,6 +1,8 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 
+var Gendarme = require("./js/Gendarme");
+
 var app = express();
 
 server = require('http').createServer(app);
@@ -19,3 +21,42 @@ server.listen(port);
 console.log("Listening on " + port);
 
 app.use(bodyParser.json());
+
+///////////////////////////API UTILS//////////////////////////////////////////
+var bodyHasRequiredProperties = function(body, properties){
+	for (var i in properties) {
+		var prop = properties[i];
+		if(!body.hasOwnProperty(prop)) {
+		    return false;
+		} else {
+			if (!body[prop]) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+///////////////////////////API UTILS END//////////////////////////////////////////
+var router = express.Router(); 				// get an instance of the express Router
+
+app.all('*', function(req, res, next) {
+  console.log("Habilitando CORS...");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
+///////////////////////// API //////////////////////////////////////
+
+router.post('/services/getGendarmes/:id', function(req, res) {
+	
+	console.log("Entro en la llamada de la api, obteniendo el servicio de los gendarmes.");
+
+	var gendarmes = Gendarme.getAll( req.params.id);
+	return (res.json(gendarmes));
+});
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+app.use('/api', router);
