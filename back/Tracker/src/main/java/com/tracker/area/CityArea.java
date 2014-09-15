@@ -1,5 +1,7 @@
 package com.tracker.area;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.tracker.area.events.NormalEventArea;
 
 
@@ -10,6 +12,7 @@ import com.tracker.area.events.NormalEventArea;
  */
 public class CityArea extends Area {
 
+	@JsonIgnore
 	private NormalEventArea eventArea;
 	
 	public CityArea(){

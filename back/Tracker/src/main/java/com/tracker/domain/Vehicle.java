@@ -1,5 +1,8 @@
 package com.tracker.domain;
 
+import com.tracker.area.Area;
+
+
 /**
  * 
  * @author matias.garcia
@@ -7,25 +10,10 @@ package com.tracker.domain;
  */
 public abstract class Vehicle extends Trackeable {
 
-	private Gendarme driver;
 	private String patente;
 	
 	public Vehicle(){
 		super();
-	}
-
-	/**
-	 * @return the driver
-	 */
-	public Gendarme getDriver() {
-		return driver;
-	}
-
-	/**
-	 * @param driver the driver to set
-	 */
-	public void setDriver(Gendarme driver) {
-		this.driver = driver;
 	}
 
 	/**
@@ -42,4 +30,9 @@ public abstract class Vehicle extends Trackeable {
 		this.patente = patente;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public abstract Area getArea();
 }

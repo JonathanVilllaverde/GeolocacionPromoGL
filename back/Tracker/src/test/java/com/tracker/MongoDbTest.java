@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
 import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -16,6 +18,7 @@ import com.tracker.area.events.CriticalEventArea;
 import com.tracker.area.events.NormalEventArea;
 import com.tracker.domain.Car;
 import com.tracker.domain.Gendarme;
+import com.tracker.domain.Trackeable;
 import com.tracker.domain.Truck;
 import com.tracker.repository.TrackeableRepository;
 import com.tracker.service.TrackerService;
@@ -80,7 +83,7 @@ public class MongoDbTest {
 		Gendarme gendarme = new Gendarme();
 		gendarme.setName("gendarmeCritical");
 		gendarme.setLatLong(new Point(-73.99756, 40.73083));
-		gendarme.setArea(area);
+
 		service.save(gendarme);
 	}
 	
@@ -89,7 +92,7 @@ public class MongoDbTest {
 		Gendarme gendarme = new Gendarme();
 		gendarme.setName("gendarmeNormal");
 		gendarme.setLatLong(new Point(-73.99756, 40.73083));
-		gendarme.setArea(cityArea);
+
 		service.save(gendarme);
 	}
 	
@@ -99,6 +102,11 @@ public class MongoDbTest {
 		Gendarme gendarmeReceived = new Gendarme();
 		gendarmeReceived.setName("gendarNormal");
 		gendarmeReceived.setLatLong(new Point(-2, 2));
+		
+		Query query = Query.query(Criteria.where("patente").is("CFG-222"));
+		Truck truck = (Truck) mongoTemplate.findOne(query , Trackeable.class);
+
+		gendarmeReceived.setVehicle(truck);
 		service.registrarCoordenada(gendarmeReceived);
 	}
 	

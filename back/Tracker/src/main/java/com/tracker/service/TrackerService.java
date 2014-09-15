@@ -42,15 +42,18 @@ public class TrackerService {
 		    g.setLatLong(gObtained.getLatLong());
 			gObtained.getHistorial().add(g);
 			gObtained.setLatLong(gendarme.getLatLong());
+			gObtained.setVehicle(gendarme.getVehicle());
 			gObtained = repository.save(gObtained);
 	
-			if(gObtained.getArea() != null){
-			// findInArea
-				Query queryA = Query.query(Criteria.where("latLong").within(gObtained.getArea().getPoligono()).
-				andOperator(Criteria.where("name").is(gendarme.getName())));
-		
-				if(!mongoTemplate.exists(queryA , Trackeable.class)){
-					gObtained.getArea().abandonoPuesto();
+			if(gObtained.getVehicle() != null){
+				if(gObtained.getVehicle().getArea() != null){
+				// findInArea
+					Query queryA = Query.query(Criteria.where("latLong").within(gObtained.getVehicle().getArea().getPoligono()).
+					andOperator(Criteria.where("name").is(gendarme.getName())));
+			
+					if(!mongoTemplate.exists(queryA , Trackeable.class)){
+						gObtained.getVehicle().getArea().abandonoPuesto();
+					}
 				}
 			}
 		}else{

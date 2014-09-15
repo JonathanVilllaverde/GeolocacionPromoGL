@@ -1,5 +1,7 @@
 package com.tracker.area;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.tracker.area.events.CriticalEventArea;
 
 /**
@@ -9,6 +11,7 @@ import com.tracker.area.events.CriticalEventArea;
  */
 public class FrontierArea extends Area {
 
+	@JsonIgnore
 	private CriticalEventArea eventArea;
 	
 	public FrontierArea(){
