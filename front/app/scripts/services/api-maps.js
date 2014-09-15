@@ -8,14 +8,21 @@
  * Service in the geolocacionApp.
  */
 angular.module('geolocacionApp')
-  .service('apiMapsService', ['ApiUtils',function (ApiUtils) {
+  .service('APIMapsService', ['ApiUtils',function (ApiUtils) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var serverURL = ApiUtils.getServerURL(); 
-  	var resource = '/services/getGendarmes';
+  	var resource = '/services/getAgent';
 
-    this.getGendarmes = function(data, IdPage, success, error){
-      //console.log(serverURL + resource + '/' + IdPage);
-    	//ApiUtils.post(serverURL + resource + '/' + IdPage, data, success, error);
+    this.getAgent = function(success, error){
+
+    	ApiUtils.get(serverURL + resource +'/1') 
+    		// then() called when son gets back
+            .then(function(data) {
+            	success(data);
+            	console.log(data);
+            }, function(data) {
+            	error(data);
+            });
     }
 
  }]);
