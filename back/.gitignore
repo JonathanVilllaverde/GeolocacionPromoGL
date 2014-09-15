@@ -1,0 +1,5 @@
+.project
+.classpath
+Tracker/bin
+Tracker/.settings
+Tracker/.gradle
