@@ -8,8 +8,8 @@
  * Controller of the layoutnavbarApp
  */
 angular.module('geolocacionApp')
-  .controller('MainCtrl', ['$scope','APIMapsService', function ($scope, APIMapsService) {
-  	$scope.agents = [];
+  .controller('MainCtrl', ['$scope','APITrackerService', function ($scope, APITrackerService) {
+  	/*$scope.agents = [];
 
   	var onSuccess = function(data){
   		$scope.agents = data.data;
@@ -21,5 +21,5 @@ angular.module('geolocacionApp')
   		console.log('error');
   	};
 
-  	APIMapsService.getAgent(onSuccess, onError);
+  	APITrackerService.getAgent(onSuccess, onError);*/
   }]);

@@ -18,7 +18,7 @@ angular
     'ngTouch',
     'ngMap'
   ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider',function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -44,7 +44,19 @@ angular
         templateUrl: 'views/layout/footer.html',
         controller: 'FooterCtrl'
       })
+      .when('/tracker/dashboard', {
+        templateUrl: 'views/tracker/dashboard.html',
+        controller: 'DashboardCtrl'
+      })
+      .when('/tracker/notifications', {
+        templateUrl: 'views/tracker/notifications.html',
+        controller: 'NotificationsCtrl'
+      })
+      .when('/tracker/map-tracker', {
+        templateUrl: 'views/tracker/map-tracker.html',
+        controller: 'MapTrackerCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
-  });
+  }]);
