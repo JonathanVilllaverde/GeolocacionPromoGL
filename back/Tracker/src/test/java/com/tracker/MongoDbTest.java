@@ -122,5 +122,6 @@ public class MongoDbTest {
 		service.registrarCoordenada(gendarmeReceived);
 	}
 	
-	
+
+
 }
