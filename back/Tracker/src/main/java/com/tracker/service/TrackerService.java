@@ -1,6 +1,10 @@
 package com.tracker.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Point;
+import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -59,5 +63,15 @@ public class TrackerService {
 		}else{
 			gObtained = repository.save(gendarme);
 		}
+	}
+	
+	public List<Trackeable> getAgents(Point sw, Point ne){
+		Point se = new Point(ne.getX(), sw.getY());
+		Point nw = new Point(sw.getX(), ne.getY());
+		Polygon mapArea = new Polygon(nw, ne, se, sw);
+		Query queryA = Query.query(Criteria.where("latLong").within(mapArea));
+		List<Trackeable> result = mongoTemplate.find(queryA,  Trackeable.class);
+		
+		return result;
 	}
 }

@@ -44,6 +44,7 @@ public class Gendarme extends Trackeable{
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
+	
 
 
 }
