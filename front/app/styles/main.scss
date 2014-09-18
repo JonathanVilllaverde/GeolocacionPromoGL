@@ -2,3 +2,25 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
+
+/** FOOTER **/
+footer{
+  height: 60px;
+  margin-top: 20px;
+  background-color: #F8F8F8;
+  .container{
+    padding-right: 15px;
+    padding-left: 15px;
+
+    .text-muted{
+      text-align: center;
+      margin: 5px 0;
+    }
+  }
+}
+
+/** MAP TRACKER **/
+map{
+  height:500px;
+  display:block;
+}
