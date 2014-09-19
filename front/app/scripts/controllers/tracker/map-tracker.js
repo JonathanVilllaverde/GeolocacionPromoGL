@@ -21,7 +21,7 @@ angular.module('geolocacionApp')
    {  
       "id":"54181fab12f16304295ff591",
       "latLong":{  
-         "x":-3.0,
+         "x":-40.0,
          "y":3.0
       },
       "name":"gendarmeCritical",
@@ -31,7 +31,7 @@ angular.module('geolocacionApp')
       "id":"5418887412f18f79d3ed4936",
       "latLong":{  
          "x":-3.0,
-         "y":3.0
+         "y":33.0
       },
       "name":"gendarmeCritical",
       "vehicle":null
@@ -39,8 +39,8 @@ angular.module('geolocacionApp')
    {  
       "id":"541888b212f11adfc45da1b7",
       "latLong":{  
-         "x":-3.0,
-         "y":3.0
+         "x":-33.0,
+         "y":33.0
       },
       "name":"gendarmeCritical",
       "vehicle":null
@@ -48,8 +48,8 @@ angular.module('geolocacionApp')
    {  
       "id":"5418865d12f1af1b013d234a",
       "latLong":{  
-         "x":-3.0,
-         "y":3.0
+         "x":-34.0,
+         "y":23.0
       },
       "name":"inside",
       "vehicle":null
@@ -57,8 +57,8 @@ angular.module('geolocacionApp')
    {  
       "id":"5418933312f1476cf66d1b3e",
       "latLong":{  
-         "x":-3.0,
-         "y":3.0
+         "x":-23.0,
+         "y":13.0
       },
       "name":"gendarmeCritical",
       "vehicle":null
@@ -66,8 +66,8 @@ angular.module('geolocacionApp')
    {  
       "id":"5418865d12f1af1b013d2348",
       "latLong":{  
-         "x":-3.0,
-         "y":3.0
+         "x":-13.0,
+         "y":13.0
       },
       "name":"gendarmeCritical",
       "vehicle":null
@@ -75,7 +75,7 @@ angular.module('geolocacionApp')
    {  
       "id":"5418935312f1eef9a7ff6ff4",
       "latLong":{  
-         "x":-3.0,
+         "x":-23.0,
          "y":3.0
       },
       "name":"gendarmeCritical",
@@ -84,7 +84,7 @@ angular.module('geolocacionApp')
    {  
       "id":"54181fac12f16304295ff593",
       "latLong":{  
-         "x":-2.0,
+         "x":-22.0,
          "y":2.0
       },
       "name":"gendarNormal",

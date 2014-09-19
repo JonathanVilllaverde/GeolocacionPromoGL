@@ -1,5 +1,5 @@
 <div ng-controller="MapTrackerCtrl">
-	<map zoom="1" center="[40.74, -74.18]" zoom-control="true">
+	<map zoom="2" center="[1, -1]" zoom-control="true">
 		<marker ng-repeat="agent in agents" id="{{ agent.id }}"  position="[ {{agent.latLong.x}} , {{agent.latLong.y}} ]" title="{{agent.name}}" on-click="showInfoWindow()">
 		</marker>
 	</map>
