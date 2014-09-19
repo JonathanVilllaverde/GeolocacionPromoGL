@@ -126,22 +126,25 @@ angular.module('geolocacionApp')
   		console.log('error');
   	};
 
+    var getAgentById = function(id){
+      for (var i = 0; i < $scope.agents.length; i++) {
+        var element = $scope.agents[i];
+        if(element.id === id){
+          return element;
+        }
+      }
+    };
+
   	$scope.$on('mapsInitialized', function(evt, maps) {
       $scope.map = maps[0];
 
-      // De acuerdo al zoom que se tiene llamar al servicio
-      $scope.map.addListener('zoom_changed', function() { 
+      $scope.map.addListener('bounds_changed', function() {
+        var sw = $scope.map.getBounds().getSouthWest(),
+          ne = $scope.map.getBounds().getNorthEast();
 
-      	console.log('changed zoom '+$scope.map.zoom); 
-      });
-
-      // Cambio de posicion en el mapa
-      $scope.map.addListener('center_changed', function() { 
-
-      	console.log('center changed '+$scope.map.center); 
+        APITrackerService.getAgent(onSuccess, onError, sw, ne);
       });
       
-
     });
 
     var infoWindow = new google.maps.InfoWindow({
@@ -163,16 +166,6 @@ angular.module('geolocacionApp')
 
 		infoWindow.content = content;
     	infoWindow.open($scope.map, this);
-    }
+  }
 
-    var getAgentById = function(id){
-    	for (var i = 0; i < $scope.agents.length; i++) {
-    		var element = $scope.agents[i];
-    		if(element.id === id){
-    			return element;
-    		}
-    	};
-    }
-
-  	//APITrackerService.getAgent(onSuccess, onError);
   }]);

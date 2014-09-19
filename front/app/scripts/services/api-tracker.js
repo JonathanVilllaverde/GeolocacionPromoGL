@@ -13,9 +13,9 @@ angular.module('geolocacionApp')
     var serverURL = ApiUtils.getServerURL(); 
   	var resource = '/services/getAgent';
 
-    this.getAgent = function(success, error){
+    this.getAgent = function(success, error, sw, ne){
 
-    	ApiUtils.get(serverURL + resource +'/1') 
+    	ApiUtils.get(serverURL + resource +'/'+sw.lat()+'/'+sw.lng()+'/'+ne.lat()+'/'+ne.lng()) 
     		// then() called when son gets back
             .then(function(data) {
             	success(data);
