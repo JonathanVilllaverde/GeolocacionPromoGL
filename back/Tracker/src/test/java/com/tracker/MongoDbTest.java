@@ -1,5 +1,8 @@
 package com.tracker;
 
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -118,5 +121,7 @@ public class MongoDbTest {
 		gendarmeReceived.setLatLong(new Point(-3, 3));
 		service.registrarCoordenada(gendarmeReceived);
 	}
+	
+
 
 }

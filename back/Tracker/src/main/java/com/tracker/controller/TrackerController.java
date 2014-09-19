@@ -10,10 +10,12 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Component;
 
 import com.tracker.domain.Gendarme;
 import com.tracker.repository.TrackeableRepository;
+import com.tracker.service.TrackerService;
 
 /**
  * TrackerController
@@ -29,6 +31,9 @@ public class TrackerController {
 	
 	@Autowired 
 	TrackeableRepository repository;
+	
+	@Autowired
+	TrackerService trackerService;
 	
 	@GET
 	@Path("/test/getTrackeable")
@@ -54,6 +59,13 @@ public class TrackerController {
 		Gendarme gendarme = new Gendarme();
 		gendarme.setId(value);
 		return  gendarme;
+	}
+	
+	@GET
+	@Path("/getAgents/{swLat}/{swLong}/{neLat}/{neLong}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAgents(@PathParam("swLat") double swLat,@PathParam("swLong") double swLong,@PathParam("neLat") double neLat,@PathParam("neLong") double neLong) {
+		return Response.ok(trackerService.getAgents(new Point(swLat, swLong), new Point(neLat, neLong))).build();
 	}
 
 }
