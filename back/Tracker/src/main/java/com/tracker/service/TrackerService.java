@@ -45,7 +45,7 @@ public class TrackerService {
 	}
 	
 	public void registerLocation(Trackeable registered) {
-		controlEvents(repository.findById(registered.getId()));
+		controlEvents(repository.findById(registered.getId()), registered.getLocation());
 	}
 
 	public List<Trackeable> getAgents(Point sw, Point ne){
@@ -55,9 +55,11 @@ public class TrackerService {
 		return repository.findByLocationWithin(mapArea);
 	}
 
-	private void controlEvents(Trackeable trackeable) {
+	private void controlEvents(Trackeable trackeable, Point newLocation) {
 
 		NotificationEvent event = null;
+		trackeable.setLocation(newLocation);
+		repository.save(trackeable);
 		
 		if (!inArea(trackeable.getArea().getPoligono(), trackeable.getId())) {
 			AreaStrategy ae = areaStrategies.get(trackeable.getArea().getAreaStrategy());
