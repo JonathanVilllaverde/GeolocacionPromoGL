@@ -45,7 +45,7 @@ dependencies {
     compile ("com.sun.jersey:jersey-json:$jerseyVersionOld")
     compile ("com.sun.jersey.contribs:jersey-spring:$jerseyVersionOld")
 
-
+	compile ("de.grundid.opendatalab:geojson-jackson:1.0")
     
 
 }

@@ -12,7 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.tracker.area.Area;
+import com.tracker.area.CityArea;
+import com.tracker.area.FrontierArea;
+import com.tracker.domain.Car;
 import com.tracker.domain.Gendarme;
+import com.tracker.domain.Trackeable;
+import com.tracker.domain.Truck;
 import com.tracker.domain.Vehicle;
 import com.tracker.service.AreaService;
 import com.tracker.service.TrackerService;
@@ -34,27 +39,68 @@ public class AbmController {
 	AreaService areaService;
 
 	@POST
-	@Path("/saveArea/{area}")
+	@Path("/saveArea")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response saveArea(@PathParam("area") Area area){
+	public Response saveArea(Area area){
 		return Response.ok(areaService.save(area)).build();
 	}
 	
 	@POST
-	@Path("/saveGendarme/{gendarme}")
+	@Path("/saveGendarme")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response saveGendarme(@PathParam("gendarme") Gendarme gendarme){
+	public Response saveGendarme(Gendarme gendarme){
 		return Response.ok(trackerService.save(gendarme)).build();
 	}
 
 	@POST
-	@Path("/saveVehicle/{vehicle}")
+	@Path("/saveVehicle")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response saveGendarme(@PathParam("vehicle") Vehicle vehicle){
+	public Response saveGendarme(Vehicle vehicle){
 		return Response.ok(trackerService.save(vehicle)).build();
+	}
+	
+	@POST
+	@Path("/registerLocation")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response register(Trackeable trackeable){
+		trackerService.registerLocation(trackeable);
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("/assignVehicle/{vehicle}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response assignVehicle(Gendarme g, @PathParam("vehicle")String id){
+		return Response.ok(trackerService.assignVehicle(g, trackerService.getVehicle(id))).build();
+	}
+	
+	@POST
+	@Path("/unassignVehicle")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response unassignVehicle(Gendarme g){
+		return Response.ok(trackerService.unassignVehicle(g)).build();
+	}
+	
+	@POST
+	@Path("/assignAreaCar/{area}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response assignAreaCar(Car car, @PathParam("area")String area ){
+		return Response.ok(trackerService.assignAreaCar(car, (CityArea) areaService.getArea(area))).build();
+	}
+
+	@POST
+	@Path("/assignAreaTruck/{area}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response assignAreaTruck(Truck truck, @PathParam("area")String area ){
+		return Response.ok(trackerService.assignAreaTruck(truck, (FrontierArea) areaService.getArea(area))).build();
 	}
 
 }

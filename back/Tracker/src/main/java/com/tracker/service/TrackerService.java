@@ -1,13 +1,16 @@
 package com.tracker.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.geojson.LngLatAlt;
+import org.geojson.Point;
+import org.geojson.Polygon;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.geo.Point;
-import org.springframework.data.geo.Polygon;
+
 import org.springframework.stereotype.Service;
 
 import com.tracker.area.Area.AreaStrategies;
@@ -49,10 +52,15 @@ public class TrackerService {
 	}
 
 	public List<Trackeable> getAgents(Point sw, Point ne){
-		Point se = new Point(ne.getX(), sw.getY());
-		Point nw = new Point(sw.getX(), ne.getY());
-		Polygon mapArea = new Polygon(nw, ne, se, sw);
-		return repository.findByLocationWithin(mapArea);
+		
+		Point se = new Point(ne.getCoordinates().getLatitude(), sw.getCoordinates().getLongitude());
+		Point nw = new Point(sw.getCoordinates().getLatitude(),ne.getCoordinates().getLongitude());
+		
+		List<LngLatAlt> elements = new ArrayList<LngLatAlt>();
+		elements.add(se.getCoordinates());
+		elements.add(nw.getCoordinates());
+	
+		return repository.findByLocationWithin( new Polygon(elements));
 	}
 
 	private void controlEvents(Trackeable trackeable, Point newLocation) {
@@ -84,27 +92,31 @@ public class TrackerService {
 		return repository.save(trackeable);
 	}
 	
-	public void assignVehicle(Gendarme g, Vehicle v){
+	public Gendarme assignVehicle(Gendarme g, Vehicle v){
 		g.setVehicle(v);
-		repository.save(g);
+		return repository.save(g);
 	}
 	
-	public void unassignVehicle(Gendarme g){
+	public Gendarme unassignVehicle(Gendarme g){
 		g.setVehicle(null);
-		repository.save(g);
+		return repository.save(g);
 	}
 
-	public void assignAreaCar(Car car, CityArea area){
+	public Car assignAreaCar(Car car, CityArea area){
 		car.setArea(area);
-		repository.save(car);
+		return repository.save(car);
 	}
 	
-	public void assignAreaTruck(Truck truck, FrontierArea area){
+	public Truck assignAreaTruck(Truck truck, FrontierArea area){
 		truck.setArea(area);
-		repository.save(truck);
+		return repository.save(truck);
 	}
 	
 	public List<Trackeable> getNotInArea(){
 		return repository.findByInarea(Boolean.FALSE);
+	}
+
+	public Vehicle getVehicle(String id) {
+		return (Vehicle) repository.findById(id);
 	}
 }
