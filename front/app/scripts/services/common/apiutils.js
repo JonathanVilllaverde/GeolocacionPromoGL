@@ -12,6 +12,8 @@ angular.module('geolocacionApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
     var serverURL = '';
   	var serverURLNode = 'http://localhost:5000/api';
+    var defaultPollingTime = 10000;
+    var polls = {};
 
   	this.getServerURL = function(){
 	  	//return serverURL;
@@ -25,12 +27,10 @@ angular.module('geolocacionApp')
                 if (typeof response.data === 'object') {
                     return response.data;
                 } else {
-                    // invalid response
                     return $q.reject(response.data);
                 }
 
             }, function(response) {
-                // something went wrong
                 return $q.reject(response.data);
        		});
     };
@@ -41,16 +41,30 @@ angular.module('geolocacionApp')
                 if (typeof response.data === 'object') {
                     return response.data;
                 } else {
-                    // invalid response
                     return $q.reject(response.data);
                 }
 
             }, function(response) {
-                // something went wrong
                 return $q.reject(response.data);
         	});
     };
 
+    this.startPolling = function(name, url, callback) {
+        if (!polls[name]) {
+            var poller = function() {
+                $http.get(url).then(callback);
+            }
+            poller();
+            polls[name] = setInterval(poller, defaultPollingTime);
+        }
+    };
+
+    this.stopPolling =  function(name) {
+        clearInterval(polls[name]);
+        delete polls[name];
+    };
+
 	this.put = function(resourceURL){};
 	this.delete = function(resourceURL){};
+
   }]);
