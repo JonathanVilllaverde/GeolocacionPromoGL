@@ -24,14 +24,6 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .when('/contact', {
-        templateUrl: 'views/contact.html',
-        controller: 'ContactCtrl'
-      })
       .when('/layout/header', {
         templateUrl: 'views/layout/header.html',
         controller: 'HeaderCtrl'
@@ -50,7 +42,7 @@ angular
       })
       .when('/tracker/notifications', {
         templateUrl: 'views/tracker/notifications.html',
-        controller: 'NotificationsCtrl'
+        controller: 'NotificationsBoardCtrl'
       })
       .when('/tracker/map-tracker', {
         templateUrl: 'views/tracker/map-tracker.html',

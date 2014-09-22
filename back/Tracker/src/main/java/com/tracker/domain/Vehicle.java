@@ -1,6 +1,5 @@
 package com.tracker.domain;
 
-import com.tracker.area.Area;
 
 
 /**
@@ -29,10 +28,6 @@ public abstract class Vehicle extends Trackeable {
 	public void setPatente(String patente) {
 		this.patente = patente;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public abstract Area getArea();
+
+
 }

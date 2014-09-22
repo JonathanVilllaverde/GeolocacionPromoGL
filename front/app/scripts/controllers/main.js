@@ -8,7 +8,7 @@
  * Controller of the layoutnavbarApp
  */
 angular.module('geolocacionApp')
-  .controller('MainCtrl', ['$scope','APITrackerService', function ($scope, APITrackerService) {
+  .controller('MainCtrl', ['$scope', function ($scope) {
   	/*$scope.agents = [];
 
   	var onSuccess = function(data){
