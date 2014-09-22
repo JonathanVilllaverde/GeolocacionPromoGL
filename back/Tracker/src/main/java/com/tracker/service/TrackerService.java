@@ -74,4 +74,8 @@ public class TrackerService {
 		
 		return result;
 	}
+	
+	public List<Trackeable> getHistorial(String id){
+		return repository.findById(id).getHistorial();
+	}
 }

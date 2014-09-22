@@ -67,5 +67,22 @@ public class TrackerController {
 	public Response getAgents(@PathParam("swLat") double swLat,@PathParam("swLong") double swLong,@PathParam("neLat") double neLat,@PathParam("neLong") double neLong) {
 		return Response.ok(trackerService.getAgents(new Point(swLat, swLong), new Point(neLat, neLong))).build();
 	}
+	
+	 @GET
+	 @Path("/test/save")
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Response save(){
+	  
+	  Gendarme g = new Gendarme();
+	  g.setName("testHeroku");
+	  return Response.ok(repository.save(g)).build();
+	 }
+	 
+	 @GET
+	 @Path("/gendarme/getHistorial/{id}")
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Response getHistorial(@PathParam("id") String id){
+		 return Response.ok(trackerService.getHistorial(id)).build();
+	 }
 
 }
