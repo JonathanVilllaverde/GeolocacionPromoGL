@@ -7,14 +7,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Component;
 
-import com.tracker.domain.Gendarme;
-import com.tracker.repository.TrackeableRepository;
+import com.tracker.service.AreaService;
+import com.tracker.service.NotificationService;
 import com.tracker.service.TrackerService;
 
 /**
@@ -27,45 +25,34 @@ import com.tracker.service.TrackerService;
 @Path("/")
 public class TrackerController {
 
-	private static final Logger logger = LoggerFactory.getLogger(TrackerController.class);
-	
-	@Autowired 
-	TrackeableRepository repository;
-	
 	@Autowired
 	TrackerService trackerService;
 	
-	@GET
-	@Path("/test/getTrackeable")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response execute(){
-		return Response.ok(repository.findAll()).build();
-	}
+	@Autowired
+	NotificationService notificationService;
 	
-
-	@GET
-	@Path("/test/{value}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String test(@PathParam("value") String value) {
-		logger.debug("value received: "+value);
-		return  value;
-	}
-	
-	@GET
-	@Path("/gendarme/{value}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Gendarme gendarme(@PathParam("value") String value) {
-		logger.debug("gendarme name received: "+value);
-		Gendarme gendarme = new Gendarme();
-		gendarme.setId(value);
-		return  gendarme;
-	}
+	@Autowired
+	AreaService areaService;
 	
 	@GET
 	@Path("/getAgents/{swLat}/{swLong}/{neLat}/{neLong}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAgents(@PathParam("swLat") double swLat,@PathParam("swLong") double swLong,@PathParam("neLat") double neLat,@PathParam("neLong") double neLong) {
 		return Response.ok(trackerService.getAgents(new Point(swLat, swLong), new Point(neLat, neLong))).build();
+	}
+	
+	@GET
+	@Path("/getNotifications")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getNotifications(){
+		return Response.ok(notificationService.getNotifications()).build();
+	}
+	
+	@GET
+	@Path("/getAreas")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAreas(){
+		return Response.ok(areaService.getArea()).build();
 	}
 
 }

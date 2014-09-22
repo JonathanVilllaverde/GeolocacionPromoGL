@@ -1,5 +1,8 @@
 package com.tracker.domain;
 
+import com.tracker.area.Area;
+
+
 
 /**
  * 
@@ -10,6 +13,7 @@ public class Gendarme extends Trackeable{
 
 	private String name;
 	private Vehicle vehicle;
+	private Area area;
 	
 	public Gendarme(){
 		super();
@@ -44,7 +48,19 @@ public class Gendarme extends Trackeable{
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
-	
 
+	/**
+	 * @return the area
+	 */
+	public Area getArea() {
+		return area;
+	}
+
+	/**
+	 * @param area the area to set
+	 */
+	public void setArea(Area area) {
+		this.area = area;
+	}
 
 }

@@ -10,6 +10,10 @@ import com.tracker.area.FrontierArea;
 public class Truck extends Vehicle{
 
     private FrontierArea area;
+    
+    public Truck(){
+    	super();
+    }
 
 	/**
 	 * @return the area
@@ -23,6 +27,7 @@ public class Truck extends Vehicle{
 	 */
 	public void setArea(FrontierArea area) {
 		this.area = area;
-	}    
+	}
+
 	
 }

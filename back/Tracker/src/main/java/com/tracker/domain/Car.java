@@ -11,6 +11,9 @@ public class Car extends Vehicle{
 	
 	private CityArea area;
 
+	public Car(){
+		super();
+	}
 	/**
 	 * @return the area
 	 */
@@ -24,5 +27,6 @@ public class Car extends Vehicle{
 	public void setArea(CityArea area) {
 		this.area = area;
 	}
+
 
 }

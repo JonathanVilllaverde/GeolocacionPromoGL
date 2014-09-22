@@ -1,8 +1,9 @@
 package com.tracker;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.tracker.area.CityArea;
 import com.tracker.area.FrontierArea;
-import com.tracker.area.events.CriticalEventArea;
-import com.tracker.area.events.NormalEventArea;
 import com.tracker.domain.Car;
 import com.tracker.domain.Gendarme;
 import com.tracker.domain.Trackeable;
@@ -51,9 +50,7 @@ public class MongoDbTest {
 	@Before
 	public void setUp(){
 		area = new FrontierArea();
-		area.setEventArea(new CriticalEventArea());
 		cityArea = new CityArea();
-		cityArea.setEventArea(new NormalEventArea());
 		
 		Point x = new Point(-73.99756, 40.73083);
 		Point y = new Point(-73.99756, 40.741404);
@@ -64,7 +61,7 @@ public class MongoDbTest {
 		area.setPoligono(poligono);
 		cityArea.setPoligono(poligono);
 	}
-
+	
 	@Test
 	public void testSaveTruck(){
 		Truck truck = new Truck();
@@ -85,7 +82,7 @@ public class MongoDbTest {
 	public void testServiceCritical(){
 		Gendarme gendarme = new Gendarme();
 		gendarme.setName("gendarmeCritical");
-		gendarme.setLatLong(new Point(-73.99756, 40.73083));
+		gendarme.setLocation(new Point(-73.99756, 40.73083));
 
 		service.save(gendarme);
 	}
@@ -94,7 +91,7 @@ public class MongoDbTest {
 	public void testServiceNormal(){
 		Gendarme gendarme = new Gendarme();
 		gendarme.setName("gendarmeNormal");
-		gendarme.setLatLong(new Point(-73.99756, 40.73083));
+		gendarme.setLocation(new Point(-73.99756, 40.73083));
 
 		service.save(gendarme);
 	}
@@ -104,24 +101,31 @@ public class MongoDbTest {
 
 		Gendarme gendarmeReceived = new Gendarme();
 		gendarmeReceived.setName("gendarNormal");
-		gendarmeReceived.setLatLong(new Point(-2, 2));
+		gendarmeReceived.setLocation(new Point(-2, 2));
 		
 		Query query = Query.query(Criteria.where("patente").is("CFG-222"));
 		Truck truck = (Truck) mongoTemplate.findOne(query , Trackeable.class);
 
 		gendarmeReceived.setVehicle(truck);
-		service.registrarCoordenada(gendarmeReceived);
+		service.registerLocation(gendarmeReceived);
+	}
+	
+
+	@Test
+	public void testRepo(){
+		Trackeable t = repo.findById("541fd9032237f166e2624270");
+		t.setLocation(new Point(-3, 3));
+//		t.setLocation(new Point(-73.99756 , 40.73083));
+		service.registerLocation((Gendarme) t);
+		assertNotNull(t);
 	}
 	
 	@Test
-	public void testReceivePointOfGendarmeCrit(){
+	public void testNotInArea(){
 
-		Gendarme gendarmeReceived = new Gendarme();
-		gendarmeReceived.setName("gendarmeCritical");
-		gendarmeReceived.setLatLong(new Point(-3, 3));
-		service.registrarCoordenada(gendarmeReceived);
+		List<Trackeable> l = service.getNotInArea();
+		assertNotNull(l);
 	}
 	
-
 
 }

@@ -3,10 +3,11 @@ package com.tracker.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.tracker.area.Area;
 
 
 /**
@@ -19,12 +20,14 @@ public abstract class Trackeable {
 	
 	@Id
 	private String id;
-	private Point latLong;
-	@JsonIgnore
-	private List<Trackeable> historial;
+	private Point location;
+//	private Area area;
+	private List<HistoryData> history;
+	private Boolean inarea;
 	
 	public Trackeable(){
-		historial = new ArrayList<Trackeable>();
+		this.inarea = Boolean.FALSE;
+		this.history = new ArrayList<HistoryData>();
 	}
 
 	/**
@@ -41,32 +44,55 @@ public abstract class Trackeable {
 	}
 	
 	/**
-	 * @return the latLong
+	 * @return the location
 	 */
-	public Point getLatLong() {
-		return latLong;
+	public Point getLocation() {
+		return location;
 	}
 
 	/**
-	 * @param latLong the latLong to set
+	 * @param location the location to set
 	 */
-	public void setLatLong(Point latLong) {
-		this.latLong = latLong;
+	public void setLocation(Point location) {
+		this.location = location;
 	}
 
 	/**
 	 * @return the historial
 	 */
-	public List<Trackeable> getHistorial() {
-		return historial;
+	public List<HistoryData> getHistory() {
+		return history;
 	}
 	
 	/**
-	 * @param historial the historial to set
+	 * @param history the historial to set
 	 */
-	public void setHistorial(List<Trackeable> historial) {
-		this.historial = historial;
+	public void setHistory(List<HistoryData> history) {
+		this.history = history;
 	}
 
+	/**
+	 * @return the area
+	 */
+	public abstract Area getArea();
+
+	/**
+	 * @param area the area to set
+	 */
+//	public abstract void setArea(Area area);
+
+	/**
+	 * @return the inarea
+	 */
+	public Boolean getInarea() {
+		return inarea;
+	}
+
+	/**
+	 * @param inarea the inarea to set
+	 */
+	public void setInarea(Boolean inarea) {
+		this.inarea = inarea;
+	}
 	
 }
