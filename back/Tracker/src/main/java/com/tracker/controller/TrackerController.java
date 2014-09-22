@@ -7,9 +7,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.geojson.Point;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Component;
 
 import com.tracker.service.AreaService;

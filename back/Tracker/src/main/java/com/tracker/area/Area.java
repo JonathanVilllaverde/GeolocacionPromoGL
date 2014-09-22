@@ -3,7 +3,8 @@ package com.tracker.area;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonSubTypes.Type;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.geojson.Polygon;
+
+import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**

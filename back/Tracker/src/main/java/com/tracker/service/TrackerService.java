@@ -1,16 +1,13 @@
 package com.tracker.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.geojson.LngLatAlt;
-import org.geojson.Point;
-import org.geojson.Polygon;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.geo.Point;
+import org.springframework.data.geo.Polygon;
 import org.springframework.stereotype.Service;
 
 import com.tracker.area.Area.AreaStrategies;
@@ -53,14 +50,10 @@ public class TrackerService {
 
 	public List<Trackeable> getAgents(Point sw, Point ne){
 		
-		Point se = new Point(ne.getCoordinates().getLatitude(), sw.getCoordinates().getLongitude());
-		Point nw = new Point(sw.getCoordinates().getLatitude(),ne.getCoordinates().getLongitude());
-		
-		List<LngLatAlt> elements = new ArrayList<LngLatAlt>();
-		elements.add(se.getCoordinates());
-		elements.add(nw.getCoordinates());
-	
-		return repository.findByLocationWithin( new Polygon(elements));
+		Point se = new Point(ne.getX(), sw.getY());
+		Point nw = new Point(sw.getX(), ne.getY());
+		Polygon mapArea = new Polygon(nw, ne, se, sw);
+		return repository.findByLocationWithin(mapArea);
 	}
 
 	private void controlEvents(Trackeable trackeable, Point newLocation) {
