@@ -17,6 +17,6 @@ public interface TrackeableRepository extends MongoRepository<Trackeable, String
 
     Trackeable findById(String id);
     Trackeable findByLocationWithinAndId(Polygon p, String id);
-    List<Trackeable> findByLocationWithin(Polygon p);
+    List<Trackeable> findByLocationWithin(Polygon mapArea);
     List<Trackeable> findByInarea(Boolean inarea);
 }

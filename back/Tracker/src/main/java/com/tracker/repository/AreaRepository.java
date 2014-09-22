@@ -15,5 +15,6 @@ import com.tracker.area.Area;
 public interface AreaRepository extends MongoRepository<Area, String> {
 
 	List<Area> findByPoligonoWithin(Polygon mapArea);
+	Area findById(String id);
 
 }

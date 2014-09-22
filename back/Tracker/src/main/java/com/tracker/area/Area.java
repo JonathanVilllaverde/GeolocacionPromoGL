@@ -1,5 +1,9 @@
 package com.tracker.area;
 
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonSubTypes.Type;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+
 import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,8 +13,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  */
 @Document
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="type")
+@JsonSubTypes({  
+    @Type(value = CityArea.class, name = "CityArea"),  
+    @Type(value = FrontierArea.class, name= "FrontierArea")
+    })  
 public abstract class Area {
 
+	private String id;
 	private Polygon poligono;
 	private AreaStrategies areaStrategy;
 
@@ -38,6 +48,19 @@ public abstract class Area {
 	public enum AreaStrategies{
 		CRITICAL,
 		NORMAL;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

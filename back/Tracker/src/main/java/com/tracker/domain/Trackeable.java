@@ -3,6 +3,9 @@ package com.tracker.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.annotate.JsonSubTypes.Type;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,12 +19,17 @@ import com.tracker.area.Area;
  *
  */
 @Document
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="type")
+@JsonSubTypes({  
+    @Type(value = Truck.class, name = "Truck"),  
+    @Type(value = Car.class, name= "Car"),
+    @Type(value = Gendarme.class, name= "Gendarme")
+    })
 public abstract class Trackeable {
 	
 	@Id
 	private String id;
 	private Point location;
-//	private Area area;
 	private List<HistoryData> history;
 	private Boolean inarea;
 	

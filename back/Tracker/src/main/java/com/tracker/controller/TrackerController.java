@@ -47,12 +47,19 @@ public class TrackerController {
 	public Response getNotifications(){
 		return Response.ok(notificationService.getNotifications()).build();
 	}
-	
+
 	@GET
 	@Path("/getAreas")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAreas(){
-		return Response.ok(areaService.getArea()).build();
+		return Response.ok(areaService.getAreas()).build();
 	}
-
+	
+	@GET
+	@Path("/getNotInArea")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getNotInArea(){
+		return Response.ok(trackerService.getNotInArea()).build();
+	}
+	
 }

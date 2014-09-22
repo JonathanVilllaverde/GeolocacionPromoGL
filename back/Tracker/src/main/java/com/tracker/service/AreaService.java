@@ -32,10 +32,18 @@ public class AreaService {
 	}
 	
 	/**
+	 * Devuelve el area identificada.
+	 * @return
+	 */
+	public Area getArea(String id){
+		return areaRepository.findById(id);
+	}
+	
+	/**
 	 * Devuelve las areas
 	 * @return
 	 */
-	public List<Area> getArea(){
+	public List<Area> getAreas(){
 		return areaRepository.findAll();
 	}
 	
@@ -45,7 +53,7 @@ public class AreaService {
 	 * @param sw: southwest point
 	 * @param ne: northeast point 
 	 */
-	public List<Area> getArea(Point sw, Point ne){
+	public List<Area> getAreas(Point sw, Point ne){
 		Point se = new Point(ne.getX(), sw.getY());
 		Point nw = new Point(sw.getX(), ne.getY());
 		Polygon mapArea = new Polygon(nw, ne, se, sw);
