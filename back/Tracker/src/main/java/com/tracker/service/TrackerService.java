@@ -44,8 +44,8 @@ public class TrackerService {
 		return repository.save(trackeable);
 	}
 	
-	public void registerLocation(Trackeable registered) {
-		controlEvents(repository.findById(registered.getId()), registered.getLocation());
+	public void registerLocation(String id, Point location) {
+		controlEvents(repository.findById(id), location);
 	}
 
 	public List<Trackeable> getAgents(Point sw, Point ne){
@@ -117,5 +117,9 @@ public class TrackerService {
 
 	public Vehicle getVehicle(String id) {
 		return (Vehicle) repository.findById(id);
+	}
+
+	public Gendarme getAgent(String id) {
+		return (Gendarme) repository.findById(id);
 	}
 }

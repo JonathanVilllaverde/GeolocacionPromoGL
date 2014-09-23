@@ -1,5 +1,8 @@
 package com.tracker.domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import com.tracker.area.Area;
 
 
@@ -13,6 +16,7 @@ public class Gendarme extends Trackeable{
 
 	private String name;
 	private Vehicle vehicle;
+	@JsonIgnore
 	private Area area;
 	
 	public Gendarme(){
@@ -52,6 +56,7 @@ public class Gendarme extends Trackeable{
 	/**
 	 * @return the area
 	 */
+	@JsonProperty("area")
 	public Area getArea() {
 		return area;
 	}
@@ -59,6 +64,7 @@ public class Gendarme extends Trackeable{
 	/**
 	 * @param area the area to set
 	 */
+	@JsonIgnore
 	public void setArea(Area area) {
 		this.area = area;
 	}

@@ -3,6 +3,8 @@ package com.tracker.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.annotate.JsonSubTypes.Type;
@@ -29,8 +31,11 @@ public abstract class Trackeable {
 	
 	@Id
 	private String id;
+	@JsonIgnore
 	private Point location;
+	@JsonIgnore
 	private List<HistoryData> history;
+	@JsonIgnore
 	private Boolean inarea;
 	
 	public Trackeable(){
@@ -54,6 +59,7 @@ public abstract class Trackeable {
 	/**
 	 * @return the location
 	 */
+	@JsonProperty("location")
 	public Point getLocation() {
 		return location;
 	}
@@ -61,6 +67,7 @@ public abstract class Trackeable {
 	/**
 	 * @param location the location to set
 	 */
+	@JsonIgnore
 	public void setLocation(Point location) {
 		this.location = location;
 	}
@@ -68,6 +75,7 @@ public abstract class Trackeable {
 	/**
 	 * @return the historial
 	 */
+	@JsonProperty("history")
 	public List<HistoryData> getHistory() {
 		return history;
 	}
@@ -75,6 +83,7 @@ public abstract class Trackeable {
 	/**
 	 * @param history the historial to set
 	 */
+	@JsonIgnore
 	public void setHistory(List<HistoryData> history) {
 		this.history = history;
 	}
@@ -85,13 +94,9 @@ public abstract class Trackeable {
 	public abstract Area getArea();
 
 	/**
-	 * @param area the area to set
-	 */
-//	public abstract void setArea(Area area);
-
-	/**
 	 * @return the inarea
 	 */
+	@JsonProperty("inarea")
 	public Boolean getInarea() {
 		return inarea;
 	}
@@ -99,6 +104,7 @@ public abstract class Trackeable {
 	/**
 	 * @param inarea the inarea to set
 	 */
+	@JsonIgnore
 	public void setInarea(Boolean inarea) {
 		this.inarea = inarea;
 	}

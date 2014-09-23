@@ -1,5 +1,8 @@
 package com.tracker.domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import com.tracker.area.FrontierArea;
 
 /**
@@ -8,7 +11,8 @@ import com.tracker.area.FrontierArea;
  *
  */
 public class Truck extends Vehicle{
-
+	
+	@JsonIgnore
     private FrontierArea area;
     
     public Truck(){
@@ -18,6 +22,7 @@ public class Truck extends Vehicle{
 	/**
 	 * @return the area
 	 */
+    @JsonProperty("area")
 	public FrontierArea getArea() {
 		return area;
 	}
@@ -25,6 +30,7 @@ public class Truck extends Vehicle{
 	/**
 	 * @param area the area to set
 	 */
+    @JsonIgnore
 	public void setArea(FrontierArea area) {
 		this.area = area;
 	}

@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
 import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -97,26 +95,11 @@ public class MongoDbTest {
 	}
 	
 	@Test
-	public void testReceivePointOfGendarme(){
-
-		Gendarme gendarmeReceived = new Gendarme();
-		gendarmeReceived.setName("gendarNormal");
-		gendarmeReceived.setLocation(new Point(-2, 2));
-		
-		Query query = Query.query(Criteria.where("patente").is("CFG-222"));
-		Truck truck = (Truck) mongoTemplate.findOne(query , Trackeable.class);
-
-		gendarmeReceived.setVehicle(truck);
-		service.registerLocation(gendarmeReceived);
-	}
-	
-
-	@Test
 	public void testRepo(){
 		Trackeable t = repo.findById("5421838088ca59c541f33009");
 		t.setLocation(new Point(-3, 3));
 //		t.setLocation(new Point(-73.99756 , 40.73083));
-		service.registerLocation((Gendarme) t);
+		service.registerLocation("541fd9032237f166e2624270", t.getLocation());
 		assertNotNull(t);
 	}
 	
