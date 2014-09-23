@@ -14,15 +14,17 @@ angular.module('geolocacionApp')
   	var resource = '/services/getAgent';
 
     this.getAgent = function(success, error, sw, ne){
-
-    	ApiUtils.get(serverURL + resource +'/'+sw.lat()+'/'+sw.lng()+'/'+ne.lat()+'/'+ne.lng()) 
-    		// then() called when son gets back
-            .then(function(data) {
-            	success(data);
-            	console.log(data);
-            }, function(data) {
-            	error(data);
-            });
+        var url = serverURL + resource +'/'+sw.lat()+'/'+sw.lng()+'/'+ne.lat()+'/'+ne.lng();
+        ApiUtils.startPolling('getAgent',url, success);
+    	// ApiUtils.get(serverURL + resource +'/'+sw.lat()+'/'+sw.lng()+'/'+ne.lat()+'/'+ne.lng())
+     //        .then(function(data) {
+     //        	success(data);
+     //        	console.log(data);
+     //        }, function(data) {
+     //        	error(data);
+     //        });
     }
+
+
 
  }]);
