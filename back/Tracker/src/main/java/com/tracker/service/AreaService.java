@@ -3,11 +3,11 @@ package com.tracker.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Point;
+import org.springframework.data.geo.Polygon;
 import org.springframework.stereotype.Service;
 
 import com.tracker.area.Area;
-import com.tracker.domain.PointWrapper;
-import com.tracker.domain.PolygonWrapper;
 import com.tracker.repository.AreaRepository;
 
 /**
@@ -53,10 +53,10 @@ public class AreaService {
 	 * @param sw: southwest point
 	 * @param ne: northeast point 
 	 */
-	public List<Area> getAreas(PointWrapper sw, PointWrapper ne){
-		PointWrapper se = new PointWrapper(ne.getX(), sw.getY());
-		PointWrapper nw = new PointWrapper(sw.getX(), ne.getY());
-		PolygonWrapper mapArea = new PolygonWrapper(nw, ne, se, sw);
+	public List<Area> getAreas(Point sw, Point ne){
+		Point se = new Point(ne.getX(), sw.getY());
+		Point nw = new Point(sw.getX(), ne.getY());
+		Polygon mapArea = new Polygon(nw, ne, se, sw);
 		return areaRepository.findByPoligonoWithin(mapArea);
 	}
 	

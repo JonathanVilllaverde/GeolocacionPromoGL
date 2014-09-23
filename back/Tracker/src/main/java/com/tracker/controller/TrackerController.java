@@ -8,9 +8,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Component;
 
-import com.tracker.domain.PointWrapper;
 import com.tracker.service.AreaService;
 import com.tracker.service.NotificationService;
 import com.tracker.service.TrackerService;
@@ -38,7 +38,7 @@ public class TrackerController {
 	@Path("/getAgents/{swLat}/{swLong}/{neLat}/{neLong}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAgents(@PathParam("swLat") double swLat,@PathParam("swLong") double swLong,@PathParam("neLat") double neLat,@PathParam("neLong") double neLong) {
-		return Response.ok(trackerService.getAgents(new PointWrapper(swLat, swLong), new PointWrapper(neLat, neLong))).build();
+		return Response.ok(trackerService.getAgents(new Point(swLat, swLong), new Point(neLat, neLong))).build();
 	}
 	
 	@GET

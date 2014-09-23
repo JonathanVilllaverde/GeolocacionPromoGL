@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
+import org.springframework.data.geo.Polygon;
 import org.springframework.stereotype.Service;
 
 import com.tracker.area.Area.AreaStrategies;
@@ -17,8 +18,6 @@ import com.tracker.area.strategy.AreaStrategy;
 import com.tracker.domain.Car;
 import com.tracker.domain.Gendarme;
 import com.tracker.domain.HistoryData;
-import com.tracker.domain.PointWrapper;
-import com.tracker.domain.PolygonWrapper;
 import com.tracker.domain.Trackeable;
 import com.tracker.domain.Truck;
 import com.tracker.domain.Vehicle;
@@ -49,13 +48,12 @@ public class TrackerService {
 		controlEvents(repository.findById(registered.getId()), registered.getLocation());
 	}
 
-	public List<Trackeable> getAgents(PointWrapper sw, PointWrapper ne){
+	public List<Trackeable> getAgents(Point sw, Point ne){
 		
 
-		PointWrapper se = new PointWrapper(ne.getX(), sw.getY());
-		PointWrapper nw = new PointWrapper(sw.getX(), ne.getY());
-		PolygonWrapper mapArea = new PolygonWrapper(nw, ne, se, sw);
-
+		Point se = new Point(ne.getX(), sw.getY());
+		Point nw = new Point(sw.getX(), ne.getY());
+		Polygon mapArea = new Polygon(nw, ne, se, sw);
 		return repository.findByLocationWithin(mapArea);
 	}
 
@@ -77,7 +75,7 @@ public class TrackerService {
 		saveHistory(trackeable.getLocation(), trackeable, event);
 	}
 
-	private Boolean inArea(PolygonWrapper poligono, String id) {
+	private Boolean inArea(Polygon poligono, String id) {
 		return repository.findByLocationWithinAndId(poligono,id) != null;
 	}
 
