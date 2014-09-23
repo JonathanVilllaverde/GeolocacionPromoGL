@@ -3,9 +3,9 @@ package com.tracker.area;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonSubTypes.Type;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
-
-import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.tracker.domain.PolygonWrapper;
 
 /**
  * 
@@ -21,19 +21,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public abstract class Area {
 
 	private String id;
-	private Polygon poligono;
+	private PolygonWrapper poligono;
 	private AreaStrategies areaStrategy;
 
 	/**
 	 * @return the poligono
 	 */
-	public Polygon getPoligono() {
+	public PolygonWrapper getPoligono() {
 		return poligono;
 	}
+
 	/**
 	 * @param poligono the poligono to set
 	 */
-	public void setPoligono(Polygon poligono) {
+	public void setPoligono(PolygonWrapper poligono) {
 		this.poligono = poligono;
 	}
 

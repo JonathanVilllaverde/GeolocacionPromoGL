@@ -4,25 +4,27 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
-import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.tracker.area.Area;
 import com.tracker.area.CityArea;
 import com.tracker.area.FrontierArea;
 import com.tracker.domain.Car;
 import com.tracker.domain.Gendarme;
+import com.tracker.domain.PointWrapper;
+import com.tracker.domain.PolygonWrapper;
 import com.tracker.domain.Trackeable;
 import com.tracker.domain.Truck;
 import com.tracker.repository.TrackeableRepository;
+import com.tracker.service.AreaService;
 import com.tracker.service.TrackerService;
 
 /**
@@ -39,6 +41,9 @@ public class MongoDbTest {
 	TrackerService service;
 	
 	@Autowired
+	AreaService areaService;
+	
+	@Autowired
 	MongoTemplate mongoTemplate;
 	
 	@Autowired
@@ -47,19 +52,49 @@ public class MongoDbTest {
 	private FrontierArea area;
 	private CityArea cityArea;
 	
-	@Before
+	
 	public void setUp(){
 		area = new FrontierArea();
 		cityArea = new CityArea();
 		
-		Point x = new Point(-73.99756, 40.73083);
-		Point y = new Point(-73.99756, 40.741404);
-		Point z = new Point(-73.988135, 40.741404);
-		Point other = new Point(-73.988135, 40.73083);
-		Polygon poligono = new Polygon(x, y, z, other);
+		PointWrapper x = new PointWrapper(-73.99756, 40.73083);
+		PointWrapper y = new PointWrapper(-73.99756, 40.741404);
+		PointWrapper z = new PointWrapper(-73.988135, 40.741404);
+		PointWrapper other = new PointWrapper(-73.988135, 40.73083);
+		
+		PointWrapper[] others = {x,y,z};
+		
+		
+		PolygonWrapper poligono = new PolygonWrapper(x, y, z, others);
 
 		area.setPoligono(poligono);
-		cityArea.setPoligono(poligono);
+//		cityArea.setPoligono(poligono);
+		
+	}
+	
+	@Test
+	public void testSaveArea(){
+		area = new FrontierArea();
+		cityArea = new CityArea();
+		
+		PointWrapper x = new PointWrapper(-73.99756, 40.73083);
+		PointWrapper y = new PointWrapper(-73.99756, 40.741404);
+		PointWrapper z = new PointWrapper(-73.988135, 40.741404);
+		
+		PointWrapper[] others = {x,y,z};
+		
+		
+		PolygonWrapper poligono = new PolygonWrapper(x, y, z, others);
+		area.setPoligono(poligono);
+		
+		
+		areaService.save(area);
+	}
+	
+	@Test 
+	public void testGetAreas(){
+		List<Area> result = areaService.getAreas();
+		System.out.println(result.getClass());
 	}
 	
 	@Test
@@ -113,7 +148,7 @@ public class MongoDbTest {
 
 	@Test
 	public void testRepo(){
-		Trackeable t = repo.findById("541fd9032237f166e2624270");
+		Trackeable t = repo.findById("5421838088ca59c541f33009");
 		t.setLocation(new Point(-3, 3));
 //		t.setLocation(new Point(-73.99756 , 40.73083));
 		service.registerLocation((Gendarme) t);

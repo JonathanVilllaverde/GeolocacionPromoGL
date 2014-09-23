@@ -2,10 +2,10 @@ package com.tracker.repository;
 
 import java.util.List;
 
-import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.tracker.area.Area;
+import com.tracker.domain.PolygonWrapper;
 
 /**
  * 
@@ -14,7 +14,7 @@ import com.tracker.area.Area;
  */
 public interface AreaRepository extends MongoRepository<Area, String> {
 
-	List<Area> findByPoligonoWithin(Polygon mapArea);
+	List<Area> findByPoligonoWithin(PolygonWrapper mapArea);
 	Area findById(String id);
 
 }
