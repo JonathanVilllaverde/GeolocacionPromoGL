@@ -3,10 +3,4 @@
 		<marker ng-repeat="agent in agents" id="{{ agent.id }}"  position="[ {{agent.latLong.x}} , {{agent.latLong.y}} ]" title="{{agent.name}}" on-click="showInfoWindow()">
 		</marker>
 	</map>
-
-	<ul class="list-group">
-	  <li class="list-group-item" ng-repeat="agent in agents">
-	  	{{agent}}
-	  </li>
-	</ul>
 </div>

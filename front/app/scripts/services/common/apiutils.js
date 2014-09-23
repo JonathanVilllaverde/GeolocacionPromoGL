@@ -12,12 +12,14 @@ angular.module('geolocacionApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
     var serverURL = '';
   	var serverURLNode = 'http://localhost:5000/api';
+    var serverURLHeroku = 'http://backgeolocation.herokuapp.com';
     var defaultPollingTime = 10000;
     var polls = {};
 
   	this.getServerURL = function(){
 	  	//return serverURL;
-	  	return serverURLNode;
+	  	//return serverURLNode;
+        return serverURLHeroku;
 	};
 
 	// TODO http://andyshora.com/promises-angularjs-explained-as-cartoon.html

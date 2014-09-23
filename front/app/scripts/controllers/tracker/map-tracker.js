@@ -55,11 +55,17 @@ angular.module('geolocacionApp')
 			} else {
 				content += '<p>Vehiculo asignado: <i>ninguno</i> </p>';
 			}
-      content += '<button type="button" id="'+agent.id+'" class="btn btn-info">Ver Historial</button>';
+      //content += '<div ng-controller="AgentHistoryCtrl">';
+      content += '<button type="button" ng-click="open()" id="'+agent.id+'" class="btn btn-info">Ver Historial</button>';
+      //content += '</div>';
 			content += '</div></div>';
 
 		infoWindow.content = content;
     	infoWindow.open($scope.map, this);
   }
+
+  $scope.open = function(){
+        console.log('here map-tracker controller');
+      }
 
   }]);

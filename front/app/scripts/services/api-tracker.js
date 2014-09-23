@@ -11,18 +11,22 @@ angular.module('geolocacionApp')
   .service('APITrackerService', ['ApiUtils',function (ApiUtils) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var serverURL = ApiUtils.getServerURL(); 
-  	var resource = '/services/getAgent';
 
     this.getAgent = function(success, error, sw, ne){
+        var resource = '/getAgents';
         var url = serverURL + resource +'/'+sw.lat()+'/'+sw.lng()+'/'+ne.lat()+'/'+ne.lng();
-        ApiUtils.startPolling('getAgent',url, success);
-    	// ApiUtils.get(serverURL + resource +'/'+sw.lat()+'/'+sw.lng()+'/'+ne.lat()+'/'+ne.lng())
-     //        .then(function(data) {
-     //        	success(data);
-     //        	console.log(data);
-     //        }, function(data) {
-     //        	error(data);
-     //        });
+        ApiUtils.startPolling('getAgents',url, success);
+    }
+
+    this.getNotInArea = function(success, error){
+        var resource = '/getNotInArea';
+        ApiUtils.get(serverURL + resource)
+            .then(function(data) {
+                success(data);
+                console.log(data);
+            }, function(data) {
+                error(data);
+            });
     }
 
 

@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngMap'
+    'ngMap',
+    'ui.bootstrap'
   ])
   .config(['$routeProvider',function ($routeProvider) {
     $routeProvider
@@ -47,6 +48,10 @@ angular
       .when('/tracker/map-tracker', {
         templateUrl: 'views/tracker/map-tracker.html',
         controller: 'MapTrackerCtrl'
+      })
+      .when('/tracker/agent-history', {
+        templateUrl: 'views/tracker/agent-history.html',
+        controller: 'AgentHistoryCtrl'
       })
       .otherwise({
         redirectTo: '/'

@@ -12,12 +12,14 @@
     "angular-animate": "~1.2.0",
     "angular-touch": "~1.2.0",
     "angular-route": "~1.2.0",
-    "ngmap": "~0.17.3"
+    "ngmap": "~0.17.3",
+    "angular-bootstrap": "~0.11.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
     "angular-scenario": "~1.2.0",
-    "ngmap": "~0.17.3"
+    "ngmap": "~0.17.3",
+    "angular-bootstrap": "~0.11.0"
   },
   "appPath": "app"
 }

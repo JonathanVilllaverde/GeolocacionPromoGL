@@ -57,6 +57,14 @@ router.get('/services/getAgent/:swlat/:swlng/:nelat/:nelng', function(req, res) 
 	return (res.json(gendarmes));
 });
 
+router.get('/services/getNotInArea', function(req, res) {
+	
+	console.log("Entro en la llamada de la api, obteniendo el servicio de los gendarmes no asignados.");
+
+	var gendarmes = Gendarme.getNotInArea( req.params.id);
+	return (res.json(gendarmes));
+});
+
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);
