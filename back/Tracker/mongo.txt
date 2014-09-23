@@ -1,0 +1,5 @@
+---
+default_process_types:
+  web: java -jar -Dport=$PORT build/libs/my-springboot-fat.jar
+
+heroku config:set MONGOHQ_URL="mongodb://company:12340987@kahana.mongohq.com:10074/backgeolocation"

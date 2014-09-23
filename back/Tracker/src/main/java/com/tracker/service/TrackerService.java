@@ -50,6 +50,7 @@ public class TrackerService {
 
 	public List<Trackeable> getAgents(Point sw, Point ne){
 		
+
 		Point se = new Point(ne.getX(), sw.getY());
 		Point nw = new Point(sw.getX(), ne.getY());
 		Polygon mapArea = new Polygon(nw, ne, se, sw);
@@ -107,6 +108,11 @@ public class TrackerService {
 	
 	public List<Trackeable> getNotInArea(){
 		return repository.findByInarea(Boolean.FALSE);
+	}
+
+	
+	public List<HistoryData> getHistorial(String id){
+		return repository.findById(id).getHistory();
 	}
 
 	public Vehicle getVehicle(String id) {

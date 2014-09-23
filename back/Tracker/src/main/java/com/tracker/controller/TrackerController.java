@@ -55,6 +55,25 @@ public class TrackerController {
 		return Response.ok(areaService.getAreas()).build();
 	}
 	
+
+//	 @GET
+//	 @Path("/test/save")
+//	 @Produces(MediaType.APPLICATION_JSON)
+//	 public Response save(){
+//	  
+//	  Gendarme g = new Gendarme();
+//	  g.setName("testHeroku");
+//	  return Response.ok(repository.save(g)).build();
+//	 }
+	 
+	 @GET
+	 @Path("/gendarme/getHistorial/{id}")
+	 @Produces(MediaType.APPLICATION_JSON)
+	 public Response getHistorial(@PathParam("id") String id){
+		 return Response.ok(trackerService.getHistorial(id)).build();
+	 }
+
+
 	@GET
 	@Path("/getNotInArea")
 	@Produces(MediaType.APPLICATION_JSON)

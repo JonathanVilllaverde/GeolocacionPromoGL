@@ -113,7 +113,7 @@ public class MongoDbTest {
 
 	@Test
 	public void testRepo(){
-		Trackeable t = repo.findById("541fd9032237f166e2624270");
+		Trackeable t = repo.findById("5421838088ca59c541f33009");
 		t.setLocation(new Point(-3, 3));
 //		t.setLocation(new Point(-73.99756 , 40.73083));
 		service.registerLocation((Gendarme) t);
