@@ -1,5 +1,8 @@
 package com.tracker.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -9,13 +12,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Point;
+import org.springframework.data.geo.Polygon;
 import org.springframework.stereotype.Component;
 
-import com.tracker.area.Area;
 import com.tracker.area.CityArea;
 import com.tracker.area.FrontierArea;
 import com.tracker.domain.Car;
 import com.tracker.domain.Gendarme;
+import com.tracker.domain.PointWrapper;
 import com.tracker.domain.Trackeable;
 import com.tracker.domain.Truck;
 import com.tracker.domain.Vehicle;
@@ -39,11 +44,36 @@ public class AbmController {
 	AreaService areaService;
 
 	@POST
-	@Path("/saveArea")
+	@Path("/saveArea/frontier")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response saveArea(Area area){
-		return Response.ok(areaService.save(area)).build();
+	public Response saveArea(List<PointWrapper> points){
+		FrontierArea fa = new FrontierArea();
+
+		List<Point> pointsArea = new ArrayList<Point>();
+		
+		for( PointWrapper p:points){
+			pointsArea.add(new Point(p.getX(),p.getY()));
+		}
+	
+		fa.setPoligono(new Polygon(pointsArea));
+		return Response.ok(areaService.save(fa)).build();
+	}
+	
+	@POST
+	@Path("/saveArea/city")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response saveAreaCity(List<PointWrapper> points){
+		CityArea ca = new CityArea();
+		List<Point> pointsArea = new ArrayList<Point>();
+		
+		for( PointWrapper p:points){
+			pointsArea.add(new Point(p.getX(),p.getY()));
+		}
+	
+		ca.setPoligono(new Polygon(pointsArea));
+		return Response.ok(areaService.save(ca)).build();
 	}
 	
 	@POST

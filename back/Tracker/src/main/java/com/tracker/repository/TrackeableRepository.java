@@ -2,9 +2,9 @@ package com.tracker.repository;
 
 import java.util.List;
 
+import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.tracker.domain.PolygonWrapper;
 import com.tracker.domain.Trackeable;
 
 
@@ -16,7 +16,7 @@ import com.tracker.domain.Trackeable;
 public interface TrackeableRepository extends MongoRepository<Trackeable, String> {
 
     Trackeable findById(String id);
-    Trackeable findByLocationWithinAndId(PolygonWrapper p, String id);
-    List<Trackeable> findByLocationWithin(PolygonWrapper mapArea);
+    Trackeable findByLocationWithinAndId(Polygon p, String id);
+    List<Trackeable> findByLocationWithin(Polygon mapArea);
     List<Trackeable> findByInarea(Boolean inarea);
 }
