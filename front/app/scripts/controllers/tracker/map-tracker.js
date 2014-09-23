@@ -36,7 +36,7 @@ angular.module('geolocacionApp')
         var sw = $scope.map.getBounds().getSouthWest(),
           ne = $scope.map.getBounds().getNorthEast();
           
-          APITrackerService.getAgent(onSuccess, onError, sw, ne);
+          APITrackerService.getAgents(onSuccess, onError, sw, ne);
       });
       
     });

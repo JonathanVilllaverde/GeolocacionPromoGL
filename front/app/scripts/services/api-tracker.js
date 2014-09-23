@@ -12,7 +12,7 @@ angular.module('geolocacionApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
     var serverURL = ApiUtils.getServerURL(); 
 
-    this.getAgent = function(success, error, sw, ne){
+    this.getAgents = function(success, error, sw, ne){
         var resource = '/getAgents';
         var url = serverURL + resource +'/'+sw.lat()+'/'+sw.lng()+'/'+ne.lat()+'/'+ne.lng();
         ApiUtils.startPolling('getAgents',url, success);
