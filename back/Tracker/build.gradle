@@ -82,5 +82,4 @@ task copyToLib << {
 
 task stage(dependsOn: ["clean", "war", "copyToLib"])
 
-    
 

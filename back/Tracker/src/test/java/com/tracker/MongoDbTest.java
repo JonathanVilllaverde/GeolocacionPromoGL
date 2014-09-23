@@ -2,16 +2,14 @@ package com.tracker;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.geojson.LngLatAlt;
-import org.geojson.Point;
-import org.geojson.Polygon;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Point;
+import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -58,14 +56,8 @@ public class MongoDbTest {
 		Point y = new Point(-73.99756, 40.741404);
 		Point z = new Point(-73.988135, 40.741404);
 		Point other = new Point(-73.988135, 40.73083);
-		
-		List<LngLatAlt> elements = new ArrayList<LngLatAlt>();
-		elements.add(x.getCoordinates());
-		elements.add(y.getCoordinates());
-		elements.add(z.getCoordinates());
-		elements.add(other.getCoordinates());
+		Polygon poligono = new Polygon(x, y, z, other);
 
-		Polygon poligono = new Polygon(elements);
 		area.setPoligono(poligono);
 		cityArea.setPoligono(poligono);
 	}

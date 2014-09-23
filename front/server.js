@@ -49,7 +49,7 @@ app.all('*', function(req, res, next) {
 
 ///////////////////////// API //////////////////////////////////////
 
-router.get('/services/getAgent/:id', function(req, res) {
+router.get('/services/getAgent/:swlat/:swlng/:nelat/:nelng', function(req, res) {
 	
 	console.log("Entro en la llamada de la api, obteniendo el servicio de los gendarmes.");
 

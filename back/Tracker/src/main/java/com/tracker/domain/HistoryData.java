@@ -2,8 +2,7 @@ package com.tracker.domain;
 
 import java.util.Date;
 
-import org.geojson.Point;
-
+import org.springframework.data.geo.Point;
 
 import com.tracker.area.notifications.NotificationEvent;
 
