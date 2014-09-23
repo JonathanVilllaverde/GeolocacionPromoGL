@@ -54,6 +54,8 @@ dependencies {
     compile ("com.sun.jersey:jersey-json:$jerseyVersionOld")
     compile ("com.sun.jersey.contribs:jersey-spring:$jerseyVersionOld")
     
+    compile ("de.grundid.opendatalab:geojson-jackson:1.0")
+    
     /* CORS-Filter Dependencies*/
     compile ("com.thetransactioncompany:cors-filter:2.0")
     compile ("com.thetransactioncompany:java-property-utils:1.9.1")
@@ -62,6 +64,7 @@ dependencies {
     runtimeOnly "org.mortbay.jetty:jetty-runner:8.1.1.v20120215"
     // monitoring on Heroku
     runtimeOnly "com.newrelic.agent.java:newrelic-agent:2.18.0"
+
 
 }
 
@@ -78,4 +81,6 @@ task copyToLib << {
 }
 
 task stage(dependsOn: ["clean", "war", "copyToLib"])
+
+    
 

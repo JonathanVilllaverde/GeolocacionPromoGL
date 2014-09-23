@@ -40,7 +40,9 @@
 			</bean>
 		</entry>
 		<entry key="NORMAL">
-			<bean class="com.tracker.area.strategy.NormalAreaStrategy" />
+			<bean class="com.tracker.area.strategy.NormalAreaStrategy">
+				<property name="service" ref="notificationService"/>
+			</bean>
 		</entry>
 	</util:map>
 

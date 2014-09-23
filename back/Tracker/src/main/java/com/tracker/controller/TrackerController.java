@@ -7,8 +7,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.geojson.Point;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.geo.Point;
+
 import org.springframework.stereotype.Component;
 
 import com.tracker.service.AreaService;
@@ -47,14 +48,15 @@ public class TrackerController {
 	public Response getNotifications(){
 		return Response.ok(notificationService.getNotifications()).build();
 	}
-	
+
 	@GET
 	@Path("/getAreas")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAreas(){
-		return Response.ok(areaService.getArea()).build();
+		return Response.ok(areaService.getAreas()).build();
 	}
 	
+
 //	 @GET
 //	 @Path("/test/save")
 //	 @Produces(MediaType.APPLICATION_JSON)
@@ -72,4 +74,12 @@ public class TrackerController {
 		 return Response.ok(trackerService.getHistorial(id)).build();
 	 }
 
+
+	@GET
+	@Path("/getNotInArea")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getNotInArea(){
+		return Response.ok(trackerService.getNotInArea()).build();
+	}
+	
 }
