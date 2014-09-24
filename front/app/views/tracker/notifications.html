@@ -2,7 +2,12 @@
 	<h4>Notificaciones</h4>
 	<ul class="list-group">
 	  <li class="list-group-item" ng-repeat="notification in notifications">
-	  	{{notification}}
+	  	<div ng-if="notification.patente">
+	  		El vehiculo de patente <b>{{notification.patente}}</b> esta siendo usado fuera de su area.
+	  	</div>
+	  	<div ng-if="notification.name">
+	  		El agente <b>{{notification.name}}</b> abandono su area.
+	  	</div>
 	  </li>
 	</ul>
 </div>
