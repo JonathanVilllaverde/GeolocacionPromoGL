@@ -1,7 +1,7 @@
 package com.tracker.area.strategy;
 
 import com.tracker.area.Area;
-import com.tracker.domain.Gendarme;
+import com.tracker.domain.Agent;
 import com.tracker.domain.Vehicle;
 
 /**
@@ -11,7 +11,8 @@ import com.tracker.domain.Vehicle;
  */
 public interface AreaStrategy {
 
-	void abandonoDePuesto(Gendarme trackeable, Area area);
+	void abandonoDePuesto(Agent trackeable, Area area);
 	void outOfAreaAssigned(Vehicle vehicle, Area area);
+	void inArea(Agent trackeable, Area area);
 
 }

@@ -3,9 +3,10 @@ package com.tracker.area.strategy;
 import java.util.Date;
 
 import com.tracker.area.Area;
-import com.tracker.area.notifications.AbandonoDePuesto;
+import com.tracker.area.notifications.AbandonedArea;
+import com.tracker.area.notifications.InCourse;
 import com.tracker.area.notifications.OutOfAreaAssigned;
-import com.tracker.domain.Gendarme;
+import com.tracker.domain.Agent;
 import com.tracker.domain.Vehicle;
 import com.tracker.service.NotificationService;
 
@@ -22,10 +23,10 @@ public class CriticalAreaStrategy implements AreaStrategy {
 	 * TODO: 1 ) notificar al gendarme
 	 * TODO: 2 ) reasignar otro gendarme al puesto
 	 */
-	public void abandonoDePuesto(Gendarme gendarme, Area area) {
-		AbandonoDePuesto event = new AbandonoDePuesto();
+	public void abandonoDePuesto(Agent agent, Area area) {
+		AbandonedArea event = new AbandonedArea();
 		event.setArea(area);
-		event.setGendarme(gendarme);
+		event.setAgent(agent);
 		event.setDate(new Date());
 		service.saveEvent(event);		
 	}
@@ -49,6 +50,15 @@ public class CriticalAreaStrategy implements AreaStrategy {
 	 */
 	public void setService(NotificationService service) {
 		this.service = service;
+	}
+
+	@Override
+	public void inArea(Agent trackeable, Area area) {
+		InCourse event = new InCourse();
+		event.setArea(area);
+		event.setAgent(trackeable);
+		event.setDate(new Date());
+		service.saveEvent(event);			
 	}
 
 }

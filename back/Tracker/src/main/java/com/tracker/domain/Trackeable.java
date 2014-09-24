@@ -25,7 +25,7 @@ import com.tracker.area.Area;
 @JsonSubTypes({  
     @Type(value = Truck.class, name = "Truck"),  
     @Type(value = Car.class, name= "Car"),
-    @Type(value = Gendarme.class, name= "Gendarme")
+    @Type(value = Agent.class, name= "Agent")
     })
 public abstract class Trackeable {
 	

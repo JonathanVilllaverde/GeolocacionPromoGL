@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.tracker.area.Area;
 import com.tracker.area.strategy.AreaStrategy;
-import com.tracker.domain.Gendarme;
+import com.tracker.domain.Agent;
 import com.tracker.domain.Trackeable;
 
 /**
@@ -12,39 +12,39 @@ import com.tracker.domain.Trackeable;
  * @author matias.garcia
  *
  */
-public class AbandonoDePuesto extends NotificationEvent {
+public class AbandonedArea extends NotificationEvent {
 
-	private Gendarme gendarme;
+	private Agent agent;
 	private Area area;
 
-	public AbandonoDePuesto(){
+	public AbandonedArea(){
 		super();
 	}
 	
-	public AbandonoDePuesto(Date date, Gendarme gendarme) {
+	public AbandonedArea(Date date, Agent gendarme) {
 		super(date);
-		this.gendarme = gendarme;
+		this.agent = gendarme;
 	}
 	
-	public AbandonoDePuesto(Area area, Gendarme gendarme, Date date) {
+	public AbandonedArea(Area area, Agent gendarme, Date date) {
 		super();
 		this.setArea(area);
-		this.setGendarme(gendarme);
+		this.setAgent(gendarme);
 		this.setDate(date);
 	}
 
 	/**
 	 * @return the gendarme
 	 */
-	public Gendarme getGendarme() {
-		return gendarme;
+	public Agent getAgent() {
+		return agent;
 	}
 
 	/**
 	 * @param gendarme the gendarme to set
 	 */
-	public void setGendarme(Gendarme gendarme) {
-		this.gendarme = gendarme;
+	public void setAgent(Agent gendarme) {
+		this.agent = gendarme;
 	}
 
 	/**
@@ -62,7 +62,12 @@ public class AbandonoDePuesto extends NotificationEvent {
 	}
 
 	public void execute(AreaStrategy ea, Trackeable trackeable) {
-		ea.abandonoDePuesto((Gendarme) trackeable, trackeable.getArea());
+		ea.abandonoDePuesto((Agent) trackeable, trackeable.getArea());
+	}
+	
+	@Override
+	public String toString(){
+		return "Abandono de puesto";
 	}
 	
 }

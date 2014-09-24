@@ -4,8 +4,6 @@ import java.util.Date;
 
 import org.springframework.data.geo.Point;
 
-import com.tracker.area.notifications.NotificationEvent;
-
 /**
  * 
  * @author matias.garcia
@@ -15,9 +13,13 @@ public class HistoryData {
 
 	private Point location;
 	private Date date;
-	private NotificationEvent notification;
+	private String notification;
 	
-	public HistoryData(Point point, NotificationEvent notificationEvent) {
+	public HistoryData(){
+		super();
+	}
+	
+	public HistoryData(Point point, String notificationEvent) {
 		super();
 		this.location = point;
 		this.notification = notificationEvent;
@@ -50,13 +52,13 @@ public class HistoryData {
 	/**
 	 * @return the notification
 	 */
-	public NotificationEvent getNotification() {
+	public String getNotification() {
 		return notification;
 	}
 	/**
 	 * @param notification the notification to set
 	 */
-	public void setNotification(NotificationEvent notification) {
+	public void setNotification(String notification) {
 		this.notification = notification;
 	}
 	
