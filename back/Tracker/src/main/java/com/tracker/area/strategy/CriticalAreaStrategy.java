@@ -7,6 +7,7 @@ import com.tracker.area.notifications.AbandonedArea;
 import com.tracker.area.notifications.InCourse;
 import com.tracker.area.notifications.OutOfAreaAssigned;
 import com.tracker.domain.Agent;
+import com.tracker.domain.Trackeable;
 import com.tracker.domain.Vehicle;
 import com.tracker.service.NotificationService;
 
@@ -52,13 +53,8 @@ public class CriticalAreaStrategy implements AreaStrategy {
 		this.service = service;
 	}
 
-	@Override
-	public void inArea(Agent trackeable, Area area) {
-		InCourse event = new InCourse();
-		event.setArea(area);
-		event.setAgent(trackeable);
-		event.setDate(new Date());
-		service.saveEvent(event);			
+	public void inArea(Trackeable trackeable, Area area) {
+		service.saveEvent(new InCourse(area,trackeable,new Date()));			
 	}
 
 }

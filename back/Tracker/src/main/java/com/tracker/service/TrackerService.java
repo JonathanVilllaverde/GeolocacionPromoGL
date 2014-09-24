@@ -15,6 +15,7 @@ import com.tracker.area.Area;
 import com.tracker.area.Area.AreaStrategies;
 import com.tracker.area.CityArea;
 import com.tracker.area.FrontierArea;
+import com.tracker.area.notifications.InCourse;
 import com.tracker.area.notifications.NotificationEvent;
 import com.tracker.area.strategy.AreaStrategy;
 import com.tracker.domain.Agent;
@@ -92,19 +93,18 @@ public class TrackerService {
 
 	private void controlEvents(Trackeable trackeable, Point newLocation) {
 
-		NotificationEvent event = null;
+		NotificationEvent event = new InCourse();
 		trackeable.setLocation(newLocation);
 		repository.save(trackeable);
+		AreaStrategy ae = areaStrategies.get(trackeable.getArea().getAreaStrategy());
 		
 		if (!inArea(trackeable.getArea().getPoligono(), trackeable.getId())) {
-			AreaStrategy ae = areaStrategies.get(trackeable.getArea().getAreaStrategy());
 			event = map.get(trackeable.getClass().getSimpleName());
-			trackeable.setInarea(Boolean.FALSE);
-			event.execute(ae, trackeable);
+			trackeable.setInarea(Boolean.FALSE);		
 		}else{
 			trackeable.setInarea(Boolean.TRUE);
 		}
-		
+		event.execute(ae, trackeable);
 		saveHistory(trackeable.getLocation(), trackeable, event);
 	}
 

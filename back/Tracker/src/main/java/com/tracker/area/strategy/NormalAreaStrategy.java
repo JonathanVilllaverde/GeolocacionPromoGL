@@ -4,8 +4,10 @@ import java.util.Date;
 
 import com.tracker.area.Area;
 import com.tracker.area.notifications.AbandonedArea;
+import com.tracker.area.notifications.InCourse;
 import com.tracker.area.notifications.OutOfAreaAssigned;
 import com.tracker.domain.Agent;
+import com.tracker.domain.Trackeable;
 import com.tracker.domain.Vehicle;
 import com.tracker.service.NotificationService;
 
@@ -43,10 +45,10 @@ public class NormalAreaStrategy implements AreaStrategy{
 		this.service = service;
 	}
 
-	public void inArea(Agent trackeable, Area area) {
-		AbandonedArea event = new AbandonedArea();
+	public void inArea(Trackeable trackeable, Area area) {
+		InCourse event = new InCourse();
 		event.setArea(area);
-		event.setAgent(trackeable);
+		event.setTrackeable(trackeable);
 		event.setDate(new Date());
 		service.saveEvent(event);			
 	}

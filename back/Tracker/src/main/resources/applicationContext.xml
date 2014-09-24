@@ -67,7 +67,7 @@
 			<bean class="com.tracker.area.notifications.OutOfAreaAssigned" />
 		</entry>
 		<entry key="Agent">
-			<bean class="com.tracker.area.notifications.AbandonoDePuesto" />
+			<bean class="com.tracker.area.notifications.AbandonedArea" />
 		</entry>
 	</util:map>
 

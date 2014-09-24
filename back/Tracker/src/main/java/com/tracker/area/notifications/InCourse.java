@@ -9,7 +9,7 @@ import com.tracker.domain.Trackeable;
 
 public class InCourse extends NotificationEvent {
 
-	private Agent agent;
+	private Trackeable trackeable;
 	private Area area;
 
 	public InCourse(){
@@ -18,28 +18,29 @@ public class InCourse extends NotificationEvent {
 	
 	public InCourse(Date date, Agent gendarme) {
 		super(date);
-		this.agent = gendarme;
+		this.trackeable = gendarme;
 	}
 	
-	public InCourse(Area area, Agent gendarme, Date date) {
+	public InCourse(Area area, Trackeable trackeable, Date date) {
 		super();
 		this.setArea(area);
-		this.setAgent(gendarme);
+		this.setTrackeable(trackeable);
 		this.setDate(date);
 	}
 
+
 	/**
-	 * @return the gendarme
+	 * @return the trackeable
 	 */
-	public Agent getAgent() {
-		return agent;
+	public Trackeable getTrackeable() {
+		return trackeable;
 	}
 
 	/**
-	 * @param gendarme the gendarme to set
+	 * @param trackeable the trackeable to set
 	 */
-	public void setAgent(Agent gendarme) {
-		this.agent = gendarme;
+	public void setTrackeable(Trackeable trackeable) {
+		this.trackeable = trackeable;
 	}
 
 	/**
