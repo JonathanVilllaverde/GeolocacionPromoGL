@@ -58,5 +58,10 @@ public class OutOfAreaAssigned extends NotificationEvent{
 	public void execute(AreaStrategy ea, Trackeable trackeable) {
 		ea.outOfAreaAssigned((Vehicle) trackeable, trackeable.getArea());
 	}
+	
+	@Override
+	public String toString(){
+		return "Fuera del area Asignada.";
+	}
 
 }

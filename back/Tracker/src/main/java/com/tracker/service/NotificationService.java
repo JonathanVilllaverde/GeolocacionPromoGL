@@ -3,6 +3,7 @@ package com.tracker.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.tracker.area.notifications.NotificationEvent;
@@ -24,6 +25,7 @@ public class NotificationService {
 	 * 
 	 * @param ge
 	 */
+	@Async("abmExecutor")
 	public void saveEvent(NotificationEvent ge){
 		eventRepo.save(ge);
 	}

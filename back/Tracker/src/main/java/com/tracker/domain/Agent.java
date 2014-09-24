@@ -12,14 +12,14 @@ import com.tracker.area.Area;
  * @author matias.garcia
  *
  */
-public class Gendarme extends Trackeable{
+public class Agent extends Trackeable{
 
 	private String name;
 	private Vehicle vehicle;
 	@JsonIgnore
 	private Area area;
 	
-	public Gendarme(){
+	public Agent(){
 		super();
 	}
 

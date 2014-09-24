@@ -1,0 +1,46 @@
+POST
+/area/{areaname}/frontier
+
+[{ "x": -69.1468818411,"y":12.3827820256}, 
+{ "x": -68.8803909636,"y":12.1833450325}, 
+{ "x": -68.7462729687,"y":12.0396451812}, 
+{ "x": -68.9700909065,"y":12.1171541488}, 
+{ "x": -69.158199925,"y":12.3122360726 }, 
+{ "x": -69.1468818411,"y":12.3827820256}]
+
+POST
+/area/{areaname}/city
+[{ "x": -69.1468818411,"y":12.3827820256}, 
+{ "x": -68.8803909636,"y":12.1833450325}, 
+{ "x": -68.7462729687,"y":12.0396451812}, 
+{ "x": -68.9700909065,"y":12.1171541488}, 
+{ "x": -69.158199925,"y":12.3122360726 }, 
+{ "x": -69.1468818411,"y":12.3827820256}]
+
+PUT
+/agent
+{"type":"Gendarme","name" : "Juan Pipota"}
+
+PUT
+/vehicle
+{"type":"Truck","patente" : "GGG-111"}
+	
+PUT
+/location/{idtrackeable}
+{ "x" : -73.99756, "y" : 40.73083}
+	
+PUT
+/agent/{idagent}/vehicle/{idvehicle}
+
+PUT
+/agent/{idagent}/area/{idvehicle}
+	
+PUT
+/agent/{idagent}/novehicle
+
+PUT
+/car/{idcar}/area/{idarea}
+
+PUT
+/truck/{idtruck}/area/{idarea}
+

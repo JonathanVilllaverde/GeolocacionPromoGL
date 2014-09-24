@@ -14,4 +14,10 @@ public class CityArea extends Area {
 		this.setAreaStrategy(AreaStrategies.NORMAL);
 	}
 
+	public CityArea(String name) {
+		super();
+		this.setAreaStrategy(AreaStrategies.NORMAL);
+		this.setName(name);
+	}
+
 }

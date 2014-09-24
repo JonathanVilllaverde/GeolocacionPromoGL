@@ -12,5 +12,11 @@ public class FrontierArea extends Area {
 		super();
 		this.setAreaStrategy(AreaStrategies.CRITICAL);
 	}
+	
+	public FrontierArea(String name){
+		super();
+		this.setAreaStrategy(AreaStrategies.CRITICAL);
+		this.setName(name);
+	}
 
 }

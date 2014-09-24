@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.tracker.area.CityArea;
 import com.tracker.area.FrontierArea;
 import com.tracker.domain.Car;
-import com.tracker.domain.Gendarme;
+import com.tracker.domain.Agent;
 import com.tracker.domain.Trackeable;
 import com.tracker.domain.Truck;
 import com.tracker.repository.TrackeableRepository;
@@ -78,7 +78,7 @@ public class MongoDbTest {
 	
 	@Test
 	public void testServiceCritical(){
-		Gendarme gendarme = new Gendarme();
+		Agent gendarme = new Agent();
 		gendarme.setName("gendarmeCritical");
 		gendarme.setLocation(new Point(-73.99756, 40.73083));
 
@@ -87,7 +87,7 @@ public class MongoDbTest {
 	
 	@Test
 	public void testServiceNormal(){
-		Gendarme gendarme = new Gendarme();
+		Agent gendarme = new Agent();
 		gendarme.setName("gendarmeNormal");
 		gendarme.setLocation(new Point(-73.99756, 40.73083));
 

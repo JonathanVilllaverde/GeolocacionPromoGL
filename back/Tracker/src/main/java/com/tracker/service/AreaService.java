@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
 import org.springframework.data.geo.Polygon;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.tracker.area.Area;
@@ -27,6 +28,7 @@ public class AreaService {
 	 * @param ge
 	 * @return 
 	 */
+	@Async("abmExecutor")
 	public <CHILD extends Area> CHILD save(CHILD area){
 		return areaRepository.save(area);
 	}

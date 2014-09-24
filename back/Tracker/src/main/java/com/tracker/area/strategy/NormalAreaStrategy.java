@@ -3,9 +3,11 @@ package com.tracker.area.strategy;
 import java.util.Date;
 
 import com.tracker.area.Area;
-import com.tracker.area.notifications.AbandonoDePuesto;
+import com.tracker.area.notifications.AbandonedArea;
+import com.tracker.area.notifications.InCourse;
 import com.tracker.area.notifications.OutOfAreaAssigned;
-import com.tracker.domain.Gendarme;
+import com.tracker.domain.Agent;
+import com.tracker.domain.Trackeable;
 import com.tracker.domain.Vehicle;
 import com.tracker.service.NotificationService;
 
@@ -21,8 +23,8 @@ public class NormalAreaStrategy implements AreaStrategy{
 	/**
 	 * TODO: 1 ) notificar al gendarme
 	 */
-	public void abandonoDePuesto(Gendarme gendarme, Area area) {
-		service.saveEvent(new AbandonoDePuesto(area, gendarme, new Date()));
+	public void abandonoDePuesto(Agent gendarme, Area area) {
+		service.saveEvent(new AbandonedArea(area, gendarme, new Date()));
 	}
 	
 	public void outOfAreaAssigned(Vehicle vehicle, Area area) {
@@ -41,6 +43,14 @@ public class NormalAreaStrategy implements AreaStrategy{
 	 */
 	public void setService(NotificationService service) {
 		this.service = service;
+	}
+
+	public void inArea(Trackeable trackeable, Area area) {
+		InCourse event = new InCourse();
+		event.setArea(area);
+		event.setTrackeable(trackeable);
+		event.setDate(new Date());
+		service.saveEvent(event);			
 	}
 
 }
