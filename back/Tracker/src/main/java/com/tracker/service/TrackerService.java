@@ -43,7 +43,6 @@ public class TrackerService {
 	@Resource(name ="notificationMap")
 	private Map<String, NotificationEvent > map;
 		
-	@Async("abmExecutor")
 	public <CHILD extends Trackeable> CHILD save(CHILD trackeable){
 		return repository.save(trackeable);
 	}
@@ -53,31 +52,26 @@ public class TrackerService {
 		controlEvents(repository.findById(id), location);
 	}
 	
-	@Async("abmExecutor")
 	public Agent assignVehicle(Agent agent, Vehicle v){
 		agent.setVehicle(v);
 		return repository.save(agent);
 	}
 	
-	@Async("abmExecutor")
 	public Agent unassignVehicle(Agent agent){
 		agent.setVehicle(null);
 		return repository.save(agent);
 	}
 
-	@Async("abmExecutor")
 	public Car assignAreaCar(Car car, CityArea area){
 		car.setArea(area);
 		return repository.save(car);
 	}
 	
-	@Async("abmExecutor")
 	public Truck assignAreaTruck(Truck truck, FrontierArea area){
 		truck.setArea(area);
 		return repository.save(truck);
 	}
 	
-	@Async("abmExecutor")
 	public Agent assignAreaAgent(Agent agent, Area area){
 		agent.setArea(area);
 		return repository.save(agent);
@@ -133,5 +127,16 @@ public class TrackerService {
 
 	public Agent getAgent(String id) {
 		return (Agent) repository.findById(id);
+	}
+
+	public void remove(String id) {
+		repository.delete(id);
+	}
+
+	public Trackeable update(Agent agent) {
+		if (repository.findById(agent.getId()) != null){
+			this.save(agent);
+		}
+		return agent;
 	}
 }

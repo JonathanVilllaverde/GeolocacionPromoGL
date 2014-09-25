@@ -19,7 +19,7 @@ POST
 
 PUT
 /agent
-{"type":"Gendarme","name" : "Juan Pipota"}
+{"type":"Agent","name" : "Juan Pipota"}
 
 PUT
 /vehicle

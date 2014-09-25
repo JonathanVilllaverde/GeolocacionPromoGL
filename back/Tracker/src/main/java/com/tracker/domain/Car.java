@@ -1,7 +1,6 @@
 package com.tracker.domain;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 import com.tracker.area.CityArea;
 
@@ -21,7 +20,7 @@ public class Car extends Vehicle{
 	/**
 	 * @return the area
 	 */
-	@JsonProperty("area")
+	@JsonIgnore
 	public CityArea getArea() {
 		return area;
 	}
@@ -34,5 +33,7 @@ public class Car extends Vehicle{
 		this.area = area;
 	}
 
-
+	public Trackeable historyRevision() {
+		return null;
+	}
 }

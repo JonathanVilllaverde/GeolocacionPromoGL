@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.tracker.area.Area;
 import com.tracker.area.notifications.AbandonedArea;
-import com.tracker.area.notifications.InCourse;
 import com.tracker.area.notifications.OutOfAreaAssigned;
 import com.tracker.domain.Agent;
 import com.tracker.domain.Trackeable;
@@ -46,11 +45,7 @@ public class NormalAreaStrategy implements AreaStrategy{
 	}
 
 	public void inArea(Trackeable trackeable, Area area) {
-		InCourse event = new InCourse();
-		event.setArea(area);
-		event.setTrackeable(trackeable);
-		event.setDate(new Date());
-		service.saveEvent(event);			
+		/*comportamiento cuando esta dentro del area*/
 	}
 
 }
