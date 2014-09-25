@@ -27,6 +27,7 @@ public abstract class Area {
 	private String name;
 	@JsonIgnore
 	private Polygon poligono;
+	@JsonIgnore
 	private AreaStrategies areaStrategy;
 
 	/**

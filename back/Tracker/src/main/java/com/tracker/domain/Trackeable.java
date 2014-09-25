@@ -75,7 +75,7 @@ public abstract class Trackeable {
 	/**
 	 * @return the historial
 	 */
-	@JsonProperty("history")
+	@JsonIgnore
 	public List<HistoryData> getHistory() {
 		return history;
 	}
@@ -108,5 +108,7 @@ public abstract class Trackeable {
 	public void setInarea(Boolean inarea) {
 		this.inarea = inarea;
 	}
+	
+	public abstract Trackeable historyRevision();
 	
 }

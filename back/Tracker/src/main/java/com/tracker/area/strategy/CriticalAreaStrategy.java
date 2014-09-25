@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.tracker.area.Area;
 import com.tracker.area.notifications.AbandonedArea;
-import com.tracker.area.notifications.InCourse;
 import com.tracker.area.notifications.OutOfAreaAssigned;
 import com.tracker.domain.Agent;
 import com.tracker.domain.Trackeable;
@@ -29,7 +28,7 @@ public class CriticalAreaStrategy implements AreaStrategy {
 		event.setArea(area);
 		event.setAgent(agent);
 		event.setDate(new Date());
-		service.saveEvent(event);		
+		service.saveEvent(event);
 	}
 	
 	public void outOfAreaAssigned(Vehicle vehicle, Area area) {
@@ -54,7 +53,7 @@ public class CriticalAreaStrategy implements AreaStrategy {
 	}
 
 	public void inArea(Trackeable trackeable, Area area) {
-		service.saveEvent(new InCourse(area,trackeable,new Date()));			
+		/*comportamiento cuando esta dentro del area*/
 	}
 
 }

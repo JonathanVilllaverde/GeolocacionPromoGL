@@ -7,8 +7,8 @@ package com.tracker.domain;
  */
 public class PointWrapper {
 
-	private Double x;
-	private Double y;
+	private Double lat;
+	private Double lng;
 	
 	public PointWrapper(){
 		super();
@@ -16,33 +16,33 @@ public class PointWrapper {
 	
 	public PointWrapper(Double x, Double y) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.lat = x;
+		this.lng = y;
 	}
 	
 	/**
 	 * @return the x
 	 */
-	public Double getX() {
-		return x;
+	public Double getLat() {
+		return lat;
 	}
 	/**
 	 * @param x the x to set
 	 */
-	public void setX(Double x) {
-		this.x = x;
+	public void setLat(Double x) {
+		this.lat = x;
 	}
 	/**
 	 * @return the y
 	 */
-	public Double getY() {
-		return y;
+	public Double getLng() {
+		return lng;
 	}
 	/**
 	 * @param y the y to set
 	 */
-	public void setY(Double y) {
-		this.y = y;
+	public void setLng(Double y) {
+		this.lng = y;
 	}
 	
 	

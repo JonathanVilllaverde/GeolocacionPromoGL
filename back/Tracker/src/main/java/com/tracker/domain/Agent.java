@@ -15,6 +15,7 @@ import com.tracker.area.Area;
 public class Agent extends Trackeable{
 
 	private String name;
+	@JsonIgnore
 	private Vehicle vehicle;
 	@JsonIgnore
 	private Area area;
@@ -41,6 +42,7 @@ public class Agent extends Trackeable{
 	 *
 	 * @return
 	 */
+	@JsonProperty("vehicle")
 	public Vehicle getVehicle() {
 		return vehicle;
 	}
@@ -49,6 +51,7 @@ public class Agent extends Trackeable{
 	 * 
 	 * @param vehicle
 	 */
+	@JsonIgnore
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
@@ -56,7 +59,7 @@ public class Agent extends Trackeable{
 	/**
 	 * @return the area
 	 */
-	@JsonProperty("area")
+	@JsonIgnore
 	public Area getArea() {
 		return area;
 	}
@@ -67,6 +70,10 @@ public class Agent extends Trackeable{
 	@JsonIgnore
 	public void setArea(Area area) {
 		this.area = area;
+	}
+	
+	public Trackeable historyRevision() {
+		return vehicle;
 	}
 
 }

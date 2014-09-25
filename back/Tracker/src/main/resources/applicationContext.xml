@@ -30,12 +30,13 @@
 	<mongo:repositories base-package="com.tracker.repository" />
 
 	<!-- server -->	
- 	<mongo:mongo id="mongo" host="${MONGOHQ_HOST}" port="${MONGOHQ_PORT}"  /> 
+<!--  	<mongo:mongo id="mongo" host="${MONGOHQ_HOST}" port="${MONGOHQ_PORT}"  /> 
 	<mongo:db-factory dbname="backgeolocation" mongo-ref="mongo"  username="company"  password="12340987" /> 
 
- 
-	<!-- local 	<mongo:mongo id="mongo" host="127.0.0.1" port="27017" /> 
-	<mongo:db-factory dbname="test" mongo-ref="mongo" />  -->
+  -->
+	<!-- local -->
+	<mongo:mongo id="mongo" host="127.0.0.1" port="27017" /> 
+	<mongo:db-factory dbname="test" mongo-ref="mongo" />  
  
     <task:annotation-driven executor="abmExecutor"/>
     
@@ -71,4 +72,7 @@
 		</entry>
 	</util:map>
 
+    <bean class="com.tracker.repository.AgentRepositoryListener" />
+
+    
 </beans>
