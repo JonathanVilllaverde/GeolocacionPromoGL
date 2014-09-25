@@ -9,114 +9,7 @@
  */
 angular.module('geolocacionApp')
   .controller('MapTrackerCtrl',  ['$scope','APITrackerService','$compile', function ($scope, APITrackerService, $compile) {
-   	$scope.agents = [  
-   {  
-      "id":"54181fab12f16304295ff590",
-      "latLong":{  
-         "x":-3.0,
-         "y":3.0
-      },
-      "name":"gendarmeCritical",
-      "vehicle":null
-   },
-   {  
-      "id":"54181fab12f16304295ff591",
-      "latLong":{  
-         "x":-40.0,
-         "y":3.0
-      },
-      "name":"gendarmeCritical",
-      "vehicle":null
-   },
-   {  
-      "id":"5418887412f18f79d3ed4936",
-      "latLong":{  
-         "x":-3.0,
-         "y":33.0
-      },
-      "name":"gendarmeCritical",
-      "vehicle":null
-   },
-   {  
-      "id":"541888b212f11adfc45da1b7",
-      "latLong":{  
-         "x":-33.0,
-         "y":33.0
-      },
-      "name":"gendarmeCritical",
-      "vehicle":null
-   },
-   {  
-      "id":"5418865d12f1af1b013d234a",
-      "latLong":{  
-         "x":-34.0,
-         "y":23.0
-      },
-      "name":"inside",
-      "vehicle":null
-   },
-   {  
-      "id":"5418933312f1476cf66d1b3e",
-      "latLong":{  
-         "x":-23.0,
-         "y":13.0
-      },
-      "name":"gendarmeCritical",
-      "vehicle":null
-   },
-   {  
-      "id":"5418865d12f1af1b013d2348",
-      "latLong":{  
-         "x":-13.0,
-         "y":13.0
-      },
-      "name":"gendarmeCritical",
-      "vehicle":null
-   },
-   {  
-      "id":"5418935312f1eef9a7ff6ff4",
-      "latLong":{  
-         "x":-23.0,
-         "y":3.0
-      },
-      "name":"gendarmeCritical",
-      "vehicle":null
-   },
-   {  
-      "id":"54181fac12f16304295ff593",
-      "latLong":{  
-         "x":-22.0,
-         "y":2.0
-      },
-      "name":"gendarNormal",
-      "vehicle":{  
-         "id":"54181fac12f16304295ff594",
-         "latLong":null,
-         "patente":"CFG-222",
-         "area":{  
-            "poligono":{  
-               "points":[  
-                  {  
-                     "x":-73.99756,
-                     "y":40.73083
-                  },
-                  {  
-                     "x":-73.99756,
-                     "y":40.741404
-                  },
-                  {  
-                     "x":-73.988135,
-                     "y":40.741404
-                  },
-                  {  
-                     "x":-73.988135,
-                     "y":40.73083
-                  }
-               ]
-            }
-         }
-      }
-   }];
+   	$scope.agents = [];
    	$scope.ZOOM_LIMIT = 1;
 
   	var onSuccess = function(data){
@@ -140,10 +33,21 @@ angular.module('geolocacionApp')
       $scope.map = maps[0];
 
       $scope.map.addListener('bounds_changed', function() {
-        var sw = $scope.map.getBounds().getSouthWest(),
-          ne = $scope.map.getBounds().getNorthEast();
+        var sw = $scope.map.getBounds().getSouthWest();
+        var ne = $scope.map.getBounds().getNorthEast();
           
-          //APITrackerService.getAgents(onSuccess, onError, sw, ne);
+        var southWest = {
+          'lat':sw.lat(),
+          'lng': sw.lng()
+        };
+
+        var northEast = {
+          'lat':ne.lat(),
+          'lng': ne.lng()
+        };
+
+        APITrackerService.getAgents(onSuccess, onError, southWest, northEast);
+
       });
       
     });
@@ -155,23 +59,23 @@ angular.module('geolocacionApp')
 
 	$scope.showInfoWindow = function() {
 		var agent = getAgentById(this.id),
-			content = '<div class="reparse_helper">'+'<h3 class="firstHeading">'+this.title+'</h3>';
+			content = '<div class="container"><div class="row"><div class="col-mod-12">'+'<h3 class="firstHeading">'+this.title+'</h3>';
 
 			if ( agent.vehicle ){
-				content += '<p>Vehiculo asignado:'+ agent.vehicle.id +'<br>patente: '+ agent.vehicle.patente+'</p>';
+				content += '<p>Vehiculo asignado: <i>Camioneta</i> <br>patente: '+ agent.vehicle.patente+'</p>';
 			} else {
 				content += '<p>Vehiculo asignado: <i>ninguno</i> </p>';
 			}
       content += '<div ng-controller="AgentHistoryCtrl">';
-        content += '<button type="button" ng-click="open()" id="'+agent.id+'" class="btn btn-info">Ver Historial</button>';
+        content += '<button type="button" ng-click="showHistory($event)" id="'+agent.id+'" class="btn btn-info">Ver Historial</button>';
 			content += '</div>';
 
+      content += '</div></div>';
       content += '</div>';
 
       var compiled = $compile(content)($scope);
 
 		  infoWindow.content = compiled[0];
-
     	infoWindow.open($scope.map, this);
   }
 
