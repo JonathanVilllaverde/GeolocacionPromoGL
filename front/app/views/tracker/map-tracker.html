@@ -1,7 +1,8 @@
 <div ng-controller="MapTrackerCtrl">
-	<map zoom="2" center="[1, -1]" zoom-control="true">
+	<map zoom="4" center="[-34.95799531086791, -59.677734375]" zoom-control="true">
 		<!--marker ng-repeat="agent in agents" id="{{ agent.id }}"  position="[ {{agent.latLong.x}} , {{agent.latLong.y}} ]" title="{{agent.name}}" on-click="showInfoWindow()" icon="images/officer.png">
 		</marker-->
+		<shape ng-repeat="area in areas" id="{{area.id}}" name="polygon" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="2" paths="{{area.points}}"></shape>
 	</map>
 </div>
 

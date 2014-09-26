@@ -10,6 +10,7 @@
 angular.module('geolocacionApp')
   .controller('MapTrackerCtrl',  ['$scope','APITrackerService','$compile', function ($scope, APITrackerService, $compile) {
    	$scope.agents = [];
+    $scope.areas = [];
     $scope.ZOOM_LIMIT = 1;
     $scope.dynMarkers = [];
 
@@ -42,6 +43,25 @@ angular.module('geolocacionApp')
       $scope.markerClusterer = new MarkerClusterer($scope.map, $scope.dynMarkers, getMarkerClustererOptions());
   	};
 
+    var renderAreas = function(data){
+      $scope.areas = [];
+      for (var i = 0; i < data.length; i++) {
+        var points = [];
+        var polygon_points = data[i].poligono.points;
+        for (var j = 0; j < polygon_points.length; j++) {
+          points.push([polygon_points[j].x,polygon_points[j].y]);
+        };
+
+        var area = {
+          'id':data[i].id,
+          'name':data[i].name,
+          'points': points
+        };
+
+        $scope.areas.push(area);
+      }
+    };
+
   	var onError = function(){
   		console.log('error');
   	};
@@ -57,6 +77,8 @@ angular.module('geolocacionApp')
 
   	$scope.$on('mapsInitialized', function(evt, maps) {
       $scope.map = maps[0];
+
+      APITrackerService.getAreas(renderAreas, onError);
 
       $scope.map.addListener('bounds_changed', function() {
         var sw = $scope.map.getBounds().getSouthWest();

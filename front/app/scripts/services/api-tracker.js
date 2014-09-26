@@ -39,6 +39,18 @@ angular.module('geolocacionApp')
 
     }
 
+    this.getAreas = function(success, error){
+        var resource = '/areas';
+        
+        ApiUtils.get(serverURL + resource)
+            .then(function(data) {
+                success(data);
+            }, function(data) {
+                error(data);
+            });
+
+    }
+
     this.stopPolling = function(name){
         ApiUtils.stopPolling(name);
     }
