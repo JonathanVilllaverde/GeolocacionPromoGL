@@ -71,9 +71,10 @@ public class Agent extends Trackeable{
 	public void setArea(Area area) {
 		this.area = area;
 	}
-	
-	public Trackeable historyRevision() {
-		return vehicle;
+
+	@JsonProperty("type")
+	public String getType() {
+		return this.getClass().getSimpleName();
 	}
 
 }

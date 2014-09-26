@@ -2,8 +2,6 @@ package com.tracker.area.notifications;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.tracker.area.strategy.AreaStrategy;
 import com.tracker.domain.Trackeable;
 
@@ -12,7 +10,6 @@ import com.tracker.domain.Trackeable;
  * @author matias.garcia
  *
  */
-@Document(collection = "notificaciones")
 public abstract class NotificationEvent {
 
 	private Date date;

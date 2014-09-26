@@ -21,6 +21,7 @@ import com.tracker.area.strategy.AreaStrategy;
 import com.tracker.domain.Agent;
 import com.tracker.domain.Car;
 import com.tracker.domain.HistoryData;
+import com.tracker.domain.PointWrapper;
 import com.tracker.domain.Trackeable;
 import com.tracker.domain.Truck;
 import com.tracker.domain.Vehicle;
@@ -48,8 +49,8 @@ public class TrackerService {
 	}
 	
 	@Async("abmExecutor")
-	public void registerLocation(String id, Point location) {
-		controlEvents(repository.findById(id), location);
+	public void registerLocation(String id, PointWrapper pointWrapper) {
+		controlEvents(repository.findById(id), pointWrapper);
 	}
 	
 	public Agent assignVehicle(Agent agent, Vehicle v){
@@ -77,15 +78,15 @@ public class TrackerService {
 		return repository.save(agent);
 	}
 
-	public List<Trackeable> getAgents(Point sw, Point ne){		
+	public List<Trackeable> getAgents(Point southPoint, Point northPoint){		
 
-		Point se = new Point(ne.getX(), sw.getY());
-		Point nw = new Point(sw.getX(), ne.getY());
-		Polygon mapArea = new Polygon(nw, ne, se, sw);
+		Point se = new Point(northPoint.getX(), southPoint.getY());
+		Point nw = new Point(southPoint.getX(), northPoint.getY());
+		Polygon mapArea = new Polygon(nw, northPoint, se, southPoint);
 		return repository.findByLocationWithin(mapArea);
 	}
 
-	private void controlEvents(Trackeable trackeable, Point newLocation) {
+	private void controlEvents(Trackeable trackeable, PointWrapper newLocation) {
 
 		NotificationEvent event = new InCourse();
 		trackeable.setLocation(newLocation);
@@ -106,7 +107,7 @@ public class TrackerService {
 		return repository.findByLocationWithinAndId(poligono,id) != null;
 	}
 
-	private Trackeable saveHistory(Point point, Trackeable trackeable, NotificationEvent notificationEvent) {
+	private Trackeable saveHistory(PointWrapper point, Trackeable trackeable, NotificationEvent notificationEvent) {
 		HistoryData historyData = new HistoryData(point,notificationEvent.toString());
 		trackeable.getHistory().add(historyData);
 		trackeable.setLocation(point);

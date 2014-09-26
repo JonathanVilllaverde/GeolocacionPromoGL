@@ -32,8 +32,8 @@
 	<!-- server -->	
 <!--  	<mongo:mongo id="mongo" host="${MONGOHQ_HOST}" port="${MONGOHQ_PORT}"  /> 
 	<mongo:db-factory dbname="backgeolocation" mongo-ref="mongo"  username="company"  password="12340987" /> 
-
-  -->
+ -->
+ 
 	<!-- local -->
 	<mongo:mongo id="mongo" host="127.0.0.1" port="27017" /> 
 	<mongo:db-factory dbname="test" mongo-ref="mongo" />  
@@ -49,14 +49,10 @@
 
 	<util:map id="areaStrategies" key-type="com.tracker.area.Area.AreaStrategies">
 		<entry key="CRITICAL">
-			<bean class="com.tracker.area.strategy.CriticalAreaStrategy">
-				<property name="service" ref="notificationService"/>
-			</bean>
+			<bean class="com.tracker.area.strategy.CriticalAreaStrategy"/>
 		</entry>
 		<entry key="NORMAL">
-			<bean class="com.tracker.area.strategy.NormalAreaStrategy">
-				<property name="service" ref="notificationService"/>
-			</bean>
+			<bean class="com.tracker.area.strategy.NormalAreaStrategy"/>
 		</entry>
 	</util:map>
 
@@ -71,8 +67,9 @@
 			<bean class="com.tracker.area.notifications.AbandonedArea" />
 		</entry>
 	</util:map>
+	
+	<bean class="com.tracker.repository.AgentRepositoryListener" />
+    <bean class="com.tracker.repository.TruckRepositoryListener" />
+    <bean class="com.tracker.repository.CarRepositoryListener" />
 
-    <bean class="com.tracker.repository.AgentRepositoryListener" />
-
-    
 </beans>

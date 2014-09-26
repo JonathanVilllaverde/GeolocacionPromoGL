@@ -16,8 +16,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.tracker.area.CityArea;
 import com.tracker.area.FrontierArea;
-import com.tracker.domain.Car;
 import com.tracker.domain.Agent;
+import com.tracker.domain.Car;
+import com.tracker.domain.PointWrapper;
 import com.tracker.domain.Trackeable;
 import com.tracker.domain.Truck;
 import com.tracker.repository.TrackeableRepository;
@@ -80,7 +81,7 @@ public class MongoDbTest {
 	public void testServiceCritical(){
 		Agent gendarme = new Agent();
 		gendarme.setName("gendarmeCritical");
-		gendarme.setLocation(new Point(-73.99756, 40.73083));
+		gendarme.setLocation(new PointWrapper((double)-73.99756, (double)40.73083));
 
 		service.save(gendarme);
 	}
@@ -89,7 +90,7 @@ public class MongoDbTest {
 	public void testServiceNormal(){
 		Agent gendarme = new Agent();
 		gendarme.setName("gendarmeNormal");
-		gendarme.setLocation(new Point(-73.99756, 40.73083));
+		gendarme.setLocation(new PointWrapper((double)-73.99756, (double)40.73083));
 
 		service.save(gendarme);
 	}
@@ -97,7 +98,7 @@ public class MongoDbTest {
 	@Test
 	public void testRepo(){
 		Trackeable t = repo.findById("5421838088ca59c541f33009");
-		t.setLocation(new Point(-3, 3));
+		t.setLocation(new PointWrapper((double)-3,(double) 3));
 //		t.setLocation(new Point(-73.99756 , 40.73083));
 		service.registerLocation("541fd9032237f166e2624270", t.getLocation());
 		assertNotNull(t);

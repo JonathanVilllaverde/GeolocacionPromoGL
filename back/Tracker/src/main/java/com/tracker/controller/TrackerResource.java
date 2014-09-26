@@ -33,7 +33,6 @@ import com.tracker.domain.PointWrapper;
 import com.tracker.domain.Truck;
 import com.tracker.domain.Vehicle;
 import com.tracker.service.AreaService;
-import com.tracker.service.NotificationService;
 import com.tracker.service.TrackerService;
 
 /**
@@ -48,9 +47,6 @@ public class TrackerResource {
 
 	@Autowired
 	TrackerService trackerService;
-	
-	@Autowired
-	NotificationService notificationService;
 	
 	@Autowired
 	AreaService areaService;
@@ -140,7 +136,7 @@ public class TrackerResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response register(@PathParam("idtrackeable")String id, PointWrapper point){
-		trackerService.registerLocation(id, new Point(point.getLat(), point.getLng()));
+		trackerService.registerLocation(id, point);
 		return Response.ok().build();
 	}
 	
@@ -211,11 +207,5 @@ public class TrackerResource {
 		return Response.ok(trackerService.assignAreaTruck((Truck) trackerService.getVehicle(truck), 
 				(FrontierArea) areaService.getArea(area))).build();
 	}	
-	
-	@GET
-	@Path("/notifications")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getNotifications(){
-		return Response.ok(notificationService.getNotifications()).build();
-	}
+
 }

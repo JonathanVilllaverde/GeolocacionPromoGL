@@ -2,8 +2,6 @@ package com.tracker.domain;
 
 import java.util.Date;
 
-import org.springframework.data.geo.Point;
-
 /**
  * 
  * @author matias.garcia
@@ -11,7 +9,7 @@ import org.springframework.data.geo.Point;
  */
 public class HistoryData {
 
-	private Point location;
+	private PointWrapper location;
 	private Date date;
 	private String notification;
 	
@@ -19,7 +17,7 @@ public class HistoryData {
 		super();
 	}
 	
-	public HistoryData(Point point, String notificationEvent) {
+	public HistoryData(PointWrapper point, String notificationEvent) {
 		super();
 		this.location = point;
 		this.notification = notificationEvent;
@@ -28,13 +26,13 @@ public class HistoryData {
 	/**
 	 * @return the location
 	 */
-	public Point getLocation() {
+	public PointWrapper getLocation() {
 		return location;
 	}
 	/**
 	 * @param location the location to set
 	 */
-	public void setLocation(Point location) {
+	public void setLocation(PointWrapper location) {
 		this.location = location;
 	}
 	/**

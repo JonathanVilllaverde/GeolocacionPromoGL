@@ -58,7 +58,7 @@ public class InCourse extends NotificationEvent {
 	}
 
 	public void execute(AreaStrategy ea, Trackeable trackeable) {
-		ea.inArea((Agent) trackeable, trackeable.getArea());
+		ea.inArea(trackeable, trackeable.getArea());
 	}
 	
 	@Override

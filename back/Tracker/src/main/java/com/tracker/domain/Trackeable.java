@@ -6,10 +6,9 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.annotate.JsonSubTypes.Type;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.tracker.area.Area;
@@ -32,7 +31,7 @@ public abstract class Trackeable {
 	@Id
 	private String id;
 	@JsonIgnore
-	private Point location;
+	private PointWrapper location;
 	@JsonIgnore
 	private List<HistoryData> history;
 	@JsonIgnore
@@ -60,7 +59,7 @@ public abstract class Trackeable {
 	 * @return the location
 	 */
 	@JsonProperty("location")
-	public Point getLocation() {
+	public PointWrapper getLocation() {
 		return location;
 	}
 
@@ -68,7 +67,7 @@ public abstract class Trackeable {
 	 * @param location the location to set
 	 */
 	@JsonIgnore
-	public void setLocation(Point location) {
+	public void setLocation(PointWrapper location) {
 		this.location = location;
 	}
 
@@ -108,7 +107,5 @@ public abstract class Trackeable {
 	public void setInarea(Boolean inarea) {
 		this.inarea = inarea;
 	}
-	
-	public abstract Trackeable historyRevision();
 	
 }
