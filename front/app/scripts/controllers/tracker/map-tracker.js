@@ -39,7 +39,7 @@ angular.module('geolocacionApp')
         }
       };
 
-      $scope.markerClusterer = new MarkerClusterer($scope.map, $scope.dynMarkers, {});
+      $scope.markerClusterer = new MarkerClusterer($scope.map, $scope.dynMarkers, getMarkerClustererOptions());
   	};
 
   	var onError = function(){
@@ -106,7 +106,7 @@ angular.module('geolocacionApp')
       }
 
       content += '<div ng-controller="AgentHistoryCtrl">';
-        content += '<button type="button" ng-click="showHistory($event)" id="'+agent.id+'" class="btn btn-info">Ver Historial</button>';
+        content += '<button type="button" ng-click="showHistory($event)" id="'+agent.id+'" class="btn btn-success">Ver Historial</button>';
 			content += '</div>';
 
       content += '</div></div>';
@@ -126,6 +126,14 @@ angular.module('geolocacionApp')
       }
     }
     return false;
+  }
+
+  var getMarkerClustererOptions = function(){
+    return {styles: [{
+          height: 53,
+          url: "images/marker.png",
+          width: 53
+        }]};
   }
 
   }]);

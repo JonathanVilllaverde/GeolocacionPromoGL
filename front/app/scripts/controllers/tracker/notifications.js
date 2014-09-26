@@ -12,6 +12,8 @@ angular.module('geolocacionApp')
 
    $scope.notifications =[];
 
+   APITrackerService.stopPolling('getAgentsIdle');
+
    var onSuccess = function(data){
        $scope.notifications = data.data;
    };

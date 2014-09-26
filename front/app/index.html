@@ -20,17 +20,12 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
-        <header ng-include="'/views/layout/header.html'" class="header">
-        </header>
-
         <nav class="navbar navbar-default" role="navigation" ng-include="'views/layout/navbar.html'"></nav>
-
-        <div ng-view=""></div>
-
+        <div class="container-fluid">
+            <div ng-view=""></div>
+        </div>
         <footer ng-include="'/views/layout/footer.html'" class="footer">
         </footer>
-    </div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
