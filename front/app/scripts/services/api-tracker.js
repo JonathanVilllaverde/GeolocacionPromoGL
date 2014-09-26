@@ -33,11 +33,14 @@ angular.module('geolocacionApp')
         ApiUtils.get(serverURL + resource)
             .then(function(data) {
                 success(data);
-                console.log(data);
             }, function(data) {
                 error(data);
             });
 
+    }
+
+    this.stopPolling = function(name){
+        ApiUtils.stopPolling(name);
     }
 
  }]);
